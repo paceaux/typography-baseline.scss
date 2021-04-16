@@ -79,6 +79,5 @@ npm-shrinkwrap.json
 
 #built stuff
 dist
+build
 
-#debugging bits
-test/debug.test.js
