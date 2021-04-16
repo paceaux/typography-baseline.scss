@@ -1,0 +1,53 @@
+/*===== 
+    #LineHeight 
+=====*/
+$baseLineHeight: 1.618;
+$smallLineHeight: 1.2;
+
+$lineHeightVarMap: (
+    "baseLineHeight": $baseLineHeight,
+    "smallLineHeight": $smallLineHeight
+);
+
+$baseFontSize: 1rem;
+/*===== 
+    #Body #Size #Paragraph #content-flow
+=====*/
+$baseTextSize: 1 * $baseFontSize;
+$biggestTextSize:  1.3 * $baseTextSize;
+$biggerTextSize: 1.2 * $baseTextSize;
+$bigTextSize: 1.1 * $baseTextSize;
+$smallTextSize: .8 * $baseTextSize;
+$smallerTextSize: .75 * $baseTextSize;
+$smallestTextSize: .618 * $baseTextSize;
+
+$textSizeVarMap: (
+    "baseTextSize": $baseTextSize,
+    "biggestTextSize": $biggestTextSize,
+    "biggerTextSize": $biggerTextSize,
+    "bigTextSize": $bigTextSize,
+    "smallTextSize": $smallTextSize,
+    "smallerTextSize": $smallerTextSize,
+    "smallestTextSize": $smallestTextSize,
+);
+
+/*===== 
+    #Heading #Title #Size
+    The small title sizes use the big text sizes; so they overlap
+    They're here, though, so that, if desired, we can deviate and not have them overlap
+=====*/
+$baseTitleSize: 1.5em;
+$biggestTitleSize: 2.617924em; /* (16 x 1.618) x 1.618 */
+$bigTitleSize: 1.618em;
+$smallTitleSize: $biggestTextSize;
+$smallerTitleSize: $biggerTextSize;
+$smallestTitleSize: $bigTextSize;
+
+$titleSizeVarMap: (
+    "baseTitleSize": $baseTitleSize,
+    "biggestTitleSize": $biggestTitleSize,
+    "bigTitleSize": $bigTitleSize,
+    "smallTitleSize": $smallTitleSize,
+    "smallerTitleSize": $smallerTitleSize,
+    "smallestTitleSize": $smallestTitleSize,
+);

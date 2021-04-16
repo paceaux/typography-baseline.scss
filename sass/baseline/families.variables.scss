@@ -1,0 +1,9 @@
+$baseFontFamily: Georgia, 'Times New Roman', serif;
+$titleFontFamily: Helvetica, Arial, sans-serif;
+$codeFontFamily: monospace;
+
+$fontFamilyVarMap: (
+    "baseFontFamily": $baseFontFamily,
+    "titleFontFamily": $titleFontFamily,
+    "codeFontFamily": $codeFontFamily,
+);

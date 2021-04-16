@@ -1,0 +1,35 @@
+$colorNeutralDarker: rgb(55,55,55);                    /*base:           #373737;    hsl(22%, 22%, 22%) */
+$colorNeutralDark: rgb(110,110,110);                   /*  base * 2:  #6e6e6e;      hsl(0, 0%, 43%) */
+$colorNeutral: rgb(165,165,165);                       /* base * 3:   #a5a5a5;      hsl(0, 0%, 65%) */
+$colorNeutralLight: rgb(192.5,192.5,192.5);            /*base * 3.5: #c1c1c1;      hsl(0, 0%, 75%) */
+$colorNeutralLighter: rgb(220,220,220);                /*  base * 4:    #dcdcdc;       hsl(0, 0%, 86%) */
+$colorCool: rgb(110,165,220);                          /*   #6ea5dc; hsl(210, 61%, 65%);  */
+$colorCoolDarker: rgb(110,165,193);                    /* #6ea5c1;  hsl (200,40%,59%) */
+
+$colorPaletteVarMap: (
+    "colorNeutralDarker" : $colorNeutralDarker,
+    "colorNeutralDark": $colorNeutralDark,
+    "colorNeutral": $colorNeutral,
+    "colorNeutralLight": $colorNeutralLight,
+    "colorNeutralLighter": $colorNeutralLighter,
+    "colorCool": $colorCool,
+    "colorCoolDarker": $colorCoolDarker
+ );
+
+/*===== 
+    #Color #Link #Border 
+    Variables follow convention found here: https://gist.github.com/paceaux/8638765e747f5bd6387b721cde99e066#sassscssstylus-naming
+=====*/
+$baseTextColor: $colorNeutralDarker;
+$baseEditorialTextColor: $colorNeutralDark;
+$baseLinkColor: $colorCool;
+$baseLinkColorHover: $colorCoolDarker;
+$baseInlineBorderColor: $colorNeutralLight;
+
+$colorBaseVarMap: (
+    "baseTextColor": $baseTextColor,
+    "baseEditorialTextColor": $baseEditorialTextColor,
+    "baseLinkColor": $baseLinkColor,
+    "baseLinkColorHover": $baseLinkColorHover,
+    "baseInlineBorderColor": $baseInlineBorderColor
+);
