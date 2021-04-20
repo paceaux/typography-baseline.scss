@@ -49,16 +49,20 @@ $variableMapsList: (
     $fontFamilyVarMap
 );
 
-$allVariablesMap: ();
-
-@each $variablesMap in $variableMapsList {
-    $allVariablesMap: map.merge($allVariablesMap, $variablesMap);
+@function getAllVariablesMap() {
+    $allVariablesMap: ();
+    
+    @each $variablesMap in $variableMapsList {
+        $allVariablesMap: map.merge($allVariablesMap, $variablesMap);
+    }
+    @return $allVariablesMap;
 }
 
 
 
 @function sassOrCssVar($varName) {
     $needsCssVar: _baselineInclude(cssVariables);
+    $allVariablesMap: getAllVariablesMap();
 
     @if $needsCssVar {
         $cssVar: string.insert('--', $varName, 100);
@@ -79,6 +83,8 @@ $allVariablesMap: ();
         }
     
     }
+    
+    @if _baselineInclude(document) {
     html {
         color: sassOrCssVar('baseTextColor');
         font-family: sassOrCssVar(baseFontFamily);
@@ -87,415 +93,421 @@ $allVariablesMap: ();
     }
 
 
-    /*=====
-    #Everything
-    =====*/
+        /*=====
+        #Everything
+        =====*/
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    ul,
-    ol,
-    dl,
-    pre {
-        line-height: sassOrCssVar(baseLineHeight);
-        margin: 0 .618rem 0 .618rem; /* Comment-A */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        ul,
+        ol,
+        dl,
+        pre {
+            line-height: sassOrCssVar(baseLineHeight);
+            margin: 0 .618rem 0 .618rem; /* Comment-A */
+        }
     }
 
+    @if _baselineInclude(headings) {
+        /*=====
+        #Headings
+        =====*/
 
-    /*=====
-    #Headings
-    =====*/
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: sassOrCssVar(titleFontFamily);
+            font-weight: bold;
+            line-height: sassOrCssVar(smallLineHeight);
+            margin-bottom: calc(1.618vmin - 1vmax + .35em);
+        }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: sassOrCssVar(titleFontFamily);
-        font-weight: bold;
-        line-height: sassOrCssVar(smallLineHeight);
-        margin-bottom: calc(1.618vmin - 1vmax + .35em); /* increases margin as screen width gets smaller */
+        h1 {
+            font-size: sassOrCssVar(biggestTitleSize);
+        }
+
+        h2 {
+            font-size: sassOrCssVar(bigTitleSize);
+        }
+
+        h3 {
+            font-size: sassOrCssVar(baseTitleSize);
+        }
+
+        h4 {
+            font-size: sassOrCssVar(smallTitleSize);
+        }
+
+        h5 {
+            font-size: sassOrCssVar(smallerTitleSize);
+        }
+
+        h6 {
+            font-size: sassOrCssVar(smallestTitleSize);
+        }
     }
 
-    h1 {
-        font-size: sassOrCssVar(biggestTitleSize);
+    @if _baselineInclude(lists) {
+        /*=====
+        #Lists
+        =====*/
+
+        ul,
+        ol,
+        dl {
+            padding: .618em .618rem; /* Comment-A */
+        }
+
+        li {
+            text-indent: -.9em;
+            line-height: sassOrCssVar(baseLineHeight);
+            padding: 0;
+            margin: 0 0 0 .618rem;
+        }
+
+        li {
+            list-style-position: inside;
+        }
+
+        dt {
+            text-indent: -.618rem;
+        }
+
+        dd {
+            margin: 0;
+            padding: 0 .618rem 0 .618rem;
+        }
     }
 
-    h2 {
-        font-size: sassOrCssVar(bigTitleSize);
+    @if _baselineInclude(blocks) {
+        /*=====
+        #Paragraphs #Blocks
+        =====*/
+
+        hr {
+            color: sassOrCssVar(colorNeutral);
+            border-width: .0625em;
+            border-style: solid;
+            margin: 1.618em .618rem;
+        }
+
+        p,
+        blockquote {
+            line-height: sassOrCssVar(baseLineHeight);
+        }
+
+        p {
+            font-size: sassOrCssVar(baseTextSize);
+            margin-bottom: .618em;
+        }
+
+
+        /* Credit where it's due:
+            https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
+        */
+        blockquote {
+            background: rgba(165, 165, 165, .15);
+            border-left: 10px solid sassOrCssVar(colorNeutralLighter);
+            margin: 1.618em .618rem; /* Comment-A */
+            padding: 0.618em .618rem;
+            quotes: "\201C""\201D""\2018""\2019";
+        }
+
+        blockquote::before {
+            color: sassOrCssVar(colorNeutralLight);
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
     }
 
-    h3 {
-        font-size: sassOrCssVar(baseTitleSize);
-    }
+    @if _baselineInclude(contentFlow) {
+        /*=====
+        #Content-Flow
+        =====*/
 
-    h4 {
-        font-size: sassOrCssVar(smallTitleSize);
-    }
+        em,
+        i,
+        cite {
+            font-style: italic;
+        }
 
-    h5 {
-        font-size: sassOrCssVar(smallerTitleSize);
-    }
+        strong,
+        b {
+            font-weight: 700;
+        }
 
-    h6 {
-        font-size: sassOrCssVar(smallestTitleSize);
-    }
+        cite {
+            display: block;
+            text-align: right;
+        }
 
+        u {
+            text-decoration: none;
+            border-bottom: 1px dotted red;
+        }
 
-    /*=====
-    #Lists
-    =====*/
-
-    ul,
-    ol,
-    dl {
-        padding: .618em .618rem; /* Comment-A */
-    }
-
-    li {
-        text-indent: -.9em;
-        line-height: sassOrCssVar(baseLineHeight);
-        padding: 0;
-        margin: 0 0 0 .618rem;
-    }
-
-    li {
-        list-style-position: inside;
-    }
-
-    dt {
-        text-indent: -.618rem;
-    }
-
-    dd {
-        margin: 0;
-        padding: 0 .618rem 0 .618rem;
-    }
-
-
-    /*=====
-    #Paragraphs #Blocks
-    =====*/
-
-    hr {
-        color: sassOrCssVar(colorNeutral);
-        border-width: .0625em;
-        border-style: solid;
-        margin: 1.618em .618rem;
-    }
-
-    p,
-    blockquote {
-        line-height: sassOrCssVar(baseLineHeight);
-    }
-
-    p {
-        font-size: sassOrCssVar(baseTextSize);
-        margin-bottom: .618em;
-    }
-
-
-    /* Credit where it's due:
-        https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
-    */
-    blockquote {
-        background: rgba(165, 165, 165, .15);
-        border-left: 10px solid sassOrCssVar(colorNeutralLighter);
-        margin: 1.618em .618rem; /* Comment-A */
-        padding: 0.618em .618rem;
-        quotes: "\201C""\201D""\2018""\2019";
-    }
-
-    blockquote::before {
-        color: sassOrCssVar(colorNeutralLight);
-        content: open-quote;
-        font-size: 4em;
-        line-height: 0.1em;
-        margin-right: 0.25em;
-        vertical-align: -0.4em;
-    }
-
-
-    /*=====
-    #Content-Flow
-    =====*/
-
-    em,
-    i,
-    cite {
-        font-style: italic;
-    }
-
-    strong,
-    b {
-        font-weight: 700;
-    }
-
-    cite {
-        display: block;
-        text-align: right;
-    }
-
-    u {
-        text-decoration: none;
-        border-bottom: 1px dotted red;
-    }
-
-    small,
-    sub,
-    sup {
-        font-size: sassOrCssVar(smallestTextSize);
-        line-height: 1;
-    }
-
-    sub {
-        vertical-align: sub;
-    }
-
-    sup {
-        vertical-align: super;
-    }
-
-
-    /*=====
-    #Content-Flow #editorial
-    =====*/
-
-    s,
-    strike,
-    del,
-    ins {
-        color: sassOrCssVar(baseEditorialTextColor);
-    }
-
-    s,
-    strike,
-    del {
-        text-decoration: strikethrough;
-    }
-
-    ins,
-    del {
-        background-color: rgba(220, 220, 220, .25);
-    }
-
-    ins {
-        text-decoration: none;
-    }
-
-
-    /*
-    mark and selection should be different, so user knows which one they've selected.
-
-    mark and selections:
-    saturation: 44%
-    lightness: 75%
-    Hue is different
-    */
-
-    mark {
-        background-color: rgba(165, 220, 165, .9);
-    }
-
-    ::selection {
-        background-color: rgba(165, 220, 220, .9);
-    }
-
-    /* Because mark and selection have same saturation, brightenss, mark won't easily stand out if it's selected */
-    mark::selection {
-        background-color: rgba(165, 220, 110, .9);
-    }
-
-    /* dfn and dt both do the same thing: denote a term to be defined */
-    dfn,
-    dt {
-        font-style: oblique;
-        font-weight: 700;
-        text-transform: capitalize;
-    }
-
-
-    /*=====
-    #Content-flow #Code
-    =====*/
-
-    pre,
-    code,
-    var,
-    samp,
-    data {
-        font-family: sassOrCssVar(codeFontFamily);
-    }
-
-    kbd,
-    samp,
-    data {
-        background-color: rgba(165, 165, 165, .2);
-    }
-
-    kbd {
-        font-size: sassOrCssVar(smallerTextSize);
-        padding: .25ex .5ex;
-        border: 1px solid  sassOrCssVar(baseInlineBorderColor);
-        border-radius: 3px;
-    }
-
-    /*Treat samp like a mini blockquote. because basically you're quoting what the computer would do*/
-    samp,
-    data {
-        padding: 0 10px;
-    }
-
-    var,
-    data {
-        font-style: italic;
-    }
-
-    samp {
-        border-left: 5px solid sassOrCssVar(baseInlineBorderColor);
-    }
-
-    data {
-        padding: 0 10px;
-    }
-
-    pre {
-        font-size: sassOrCssVar(smallerTextSize);
-        line-height: sassOrCssVar(smallLineHeight);
-        padding: .618em .618rem;
-        border: 1px solid sassOrCssVar(baseInlineBorderColor);
-        border-radius: 2px;
-        overflow: scroll;
-    }
-
-
-    /*=====
-    #Ruby
-    =====*/
-
-    ruby {
-        display: ruby;
-        position: relative;
-        margin:0 .5ex;
-        -webkit-ruby-position: before;
-        ruby-position: over;
-        ruby-position: before;
-    }
-
-    rtc, rbc {
-        font-size: inherit;
-        line-height: 1;
-        ruby-align: start;
-    }
-
-    rt {
-        display: ruby-text;
-        font-size: .7em;
-    }
-
-    rt + rt {
-        margin-left: .5ex;
-    }
-
-    rtc > bdo {
-        display: -webkit-ruby-text-container;
-        display: ruby-base-container;
-    }
-
-    /*complex ruby for chrome and Edge*/
-    /*only FF has "complete" ruby support*/
-    @supports (ruby-align: left) or ( not (display:ruby-base-container))  {
-
-        ruby {
-            display:inline-flex;
-            flex-direction: column;
-            vertical-align: 1em;
+        small,
+        sub,
+        sup {
+            font-size: sassOrCssVar(smallestTextSize);
             line-height: 1;
         }
 
-        rtc, rt {
-            order: -1;
-            flex-grow: 1;
-            flex-shrink: 0;
+        sub {
+            vertical-align: sub;
         }
 
-        rtc {
-            display: inline-flex;
+        sup {
+            vertical-align: super;
+        }
+
+
+        /*=====
+        #Content-Flow #editorial
+        =====*/
+
+        s,
+        strike,
+        del,
+        ins {
+            color: sassOrCssVar(baseEditorialTextColor);
+        }
+
+        s,
+        strike,
+        del {
+            text-decoration: strikethrough;
+        }
+
+        ins,
+        del {
+            background-color: rgba(220, 220, 220, .25);
+        }
+
+        ins {
+            text-decoration: none;
+        }
+        /*
+        mark and selection should be different, so user knows which one they've selected.
+
+        mark and selections:
+        saturation: 44%
+        lightness: 75%
+        Hue is different
+        */
+
+        mark {
+            background-color: rgba(165, 220, 165, .9);
+        }
+
+        ::selection {
+            background-color: rgba(165, 220, 220, .9);
+        }
+
+        /* Because mark and selection have same saturation, brightenss, mark won't easily stand out if it's selected */
+        mark::selection {
+            background-color: rgba(165, 220, 110, .9);
+        }
+        /* dfn and dt both do the same thing: denote a term to be defined */
+        dfn,
+        dt {
+            font-style: oblique;
+            font-weight: 700;
+            text-transform: capitalize;
         }
     }
 
-    /*Edge fixes*/
-    @supports  ((ruby-align: left)) {
+    @if _baselineInclude(code) {
+        /*=====
+        #Content-flow #Code
+        =====*/
 
-        rtc {
-            justify-content: space-between;
+        pre,
+        code,
+        var,
+        samp,
+        data {
+            font-family: sassOrCssVar(codeFontFamily);
+        }
+
+        kbd,
+        samp,
+        data {
+            background-color: rgba(165, 165, 165, .2);
+        }
+
+        kbd {
+            font-size: sassOrCssVar(smallerTextSize);
+            padding: .25ex .5ex;
+            border: 1px solid  sassOrCssVar(baseInlineBorderColor);
+            border-radius: 3px;
+        }
+
+        /*Treat samp like a mini blockquote. because basically you're quoting what the computer would do*/
+        samp,
+        data {
+            padding: 0 10px;
+        }
+
+        var,
+        data {
+            font-style: italic;
+        }
+
+        samp {
+            border-left: 5px solid sassOrCssVar(baseInlineBorderColor);
+        }
+
+        data {
+            padding: 0 10px;
+        }
+
+        pre {
+            font-size: sassOrCssVar(smallerTextSize);
+            line-height: sassOrCssVar(smallLineHeight);
+            padding: .618em .618rem;
+            border: 1px solid sassOrCssVar(baseInlineBorderColor);
+            border-radius: 2px;
+            overflow: scroll;
+        }
+    }
+
+    @if _baselineInclude(ruby) {
+        /*=====
+        #Ruby
+        =====*/
+
+        ruby {
+            display: ruby;
+            position: relative;
+            margin:0 .5ex;
+            -webkit-ruby-position: before;
+            ruby-position: over;
+            ruby-position: before;
+        }
+
+        rtc, rbc {
+            font-size: inherit;
+            line-height: 1;
+            ruby-align: start;
         }
 
         rt {
-            display: inline-flex;
+            display: ruby-text;
+            font-size: .7em;
+        }
+
+        rt + rt {
+            margin-left: .5ex;
+        }
+
+        rtc > bdo {
+            display: -webkit-ruby-text-container;
+            display: ruby-base-container;
+        }
+
+        /*complex ruby for chrome and Edge*/
+        /*only FF has "complete" ruby support*/
+        @supports (ruby-align: left) or ( not (display:ruby-base-container))  {
+
+            ruby {
+                display:inline-flex;
+                flex-direction: column;
+                vertical-align: 1em;
+                line-height: 1;
+            }
+
+            rtc, rt {
+                order: -1;
+                flex-grow: 1;
+                flex-shrink: 0;
+            }
+
+            rtc {
+                display: inline-flex;
+            }
+        }
+
+        /*Edge fixes*/
+        @supports  ((ruby-align: left)) {
+
+            rtc {
+                justify-content: space-between;
+            }
+
+            rt {
+                display: inline-flex;
+            }
         }
     }
 
-
+    @if _baselineInclude(links) {
     /*=====
     #Links
     =====*/
 
-    a {
-        color: sassOrCssVar(baseLinkColor);
-        text-decoration: none;
-        border-bottom: 1px dotted transparent;
-        transition: all .3s ease-in-out;
+        a {
+            color: sassOrCssVar(baseLinkColor);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: all .3s ease-in-out;
+        }
+
+        a:hover,
+        a:focus {
+            color: sassOrCssVar(baseLinkColorHover);
+            border-color: sassOrCssVar(baseLinkColorHover);
+            outline: none;
+        }
+
+        a:active {
+            border-style: solid;
+        }
     }
 
-    a:hover,
-    a:focus {
-        color: sassOrCssVar(baseLinkColorHover);
-        border-color: sassOrCssVar(baseLinkColorHover);
-        outline: none;
-    }
+    @if _baselineInclude(table) {
+        /*==========
+        #Table
+        ==========*/
 
-    a:active {
-        border-style: solid;
-    }
+        table {
+            font-size:  sassOrCssVar(smallTextSize);
+        }
 
+        caption {
+            font-size:  sassOrCssVar(baseTextSize);
+            text-transform: capitalize;
+            font-style: italic;
+        }
 
-    /*==========
-    #Table
-    ==========*/
+        th, td {
+            text-align: left;
+            vertical-align: middle;
+            line-height: sassOrCssVar(smallLineHeight);
+            padding: .4em .618rem;
+        }
 
-    table {
-        font-size:  sassOrCssVar(smallTextSize);
-    }
+        th {
+            font-family: sassOrCssVar(titleFontFamily);
+            font-weight: bold;
+            font-size: sassOrCssVar(smallTitleSize); /*treat th in a body as h4*/
+        }
 
-    caption {
-        font-size:  sassOrCssVar(baseTextSize);
-        text-transform: capitalize;
-        font-style: italic;
-    }
-
-    th, td {
-        text-align: left;
-        vertical-align: middle;
-        line-height: sassOrCssVar(smallLineHeight);
-        padding: .4em .618rem;
-    }
-
-    th {
-        font-family: sassOrCssVar(titleFontFamily);
-        font-weight: bold;
-        font-size: sassOrCssVar(smallTitleSize); /*treat th in a body as h4*/
-    }
-
-    thead th,
-    tfoot th {
-        font-size: sassOrCssVar(baseTitleSize); /*treat th in header/footer as h3*/
+        thead th,
+        tfoot th {
+            font-size: sassOrCssVar(baseTitleSize); /*treat th in header/footer as h3*/
+        }
     }
 
 }
