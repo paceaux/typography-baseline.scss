@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import 'node_modules/sass-true/sass/true';
 @import '../../sass/_baseline';
 
@@ -33,6 +34,20 @@
                 --zab: 2;
             }
         }
+    }
+
+    @include it('can merge a list of maps into one map') {
+        $map1: ('bigger': 3, 'smaller': .5 );
+        $map2: ('yellow': rgb(0, 200, 0), 'green': rgb(100, 0, 0));
+        $myListOfMaps: ($map1, $map2);
+        $mergedMapsList: mergeMapsInList($myListOfMaps);
+
+        @include assert-true(
+            map.has-key($mergedMapsList, 'bigger')
+        );
+        @include assert-true(
+            map.has-key($mergedMapsList, 'yellow')
+        );
     }
 
     @include it('sassOrCSSVar can output a CSS var if told to') {

@@ -49,10 +49,10 @@ $variableMapsList: (
     $fontFamilyVarMap
 );
 
-@function getAllVariablesMap() {
+@function mergeMapsInList($mapsList: variableMapsList) {
     $allVariablesMap: ();
     
-    @each $variablesMap in $variableMapsList {
+    @each $variablesMap in $mapsList {
         $allVariablesMap: map.merge($allVariablesMap, $variablesMap);
     }
     @return $allVariablesMap;
@@ -60,7 +60,7 @@ $variableMapsList: (
 
 
 
-@function sassOrCssVar($varName, $needsCssVar: _baselineInclude(cssVariables), $allVariablesMap: getAllVariablesMap()) {
+@function sassOrCssVar($varName, $needsCssVar: _baselineInclude(cssVariables), $allVariablesMap: mergeMapsInList()) {
 
     @if $needsCssVar {
         $cssVar: string.insert('--', $varName, 100);
