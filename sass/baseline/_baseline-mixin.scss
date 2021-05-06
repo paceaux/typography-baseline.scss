@@ -74,7 +74,6 @@ $variableMapsList: (
 @mixin typographyBaseline($include: (all), $exclude: ()) {
     $init: _baselineInclude($include, $exclude );
 
-    @debug $exclude;
     @if _baselineInclude(cssVariables) {
         :root {
             @include outputVariableMaps($variableMapsList);
