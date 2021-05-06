@@ -26,7 +26,8 @@
   },
   "scripts": {
     "test": "mocha test/*.js",
-    "debug": "sass test/debug.scss:build/debug.css"
+    "debug": "sass test/debug.scss:build/debug.css",
+    "build": "sass test/debug.scss:build/baseline.css"
   },
   "devDependencies": {
     "mocha": "^8.3.2",
