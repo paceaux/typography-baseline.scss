@@ -1,0 +1,487 @@
+@use 'sass:map';
+@import 'node_modules/sass-true/sass/true';
+@import '../../sass/_baseline';
+
+@include describe('individual sections') {
+    @include it('document') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(document)
+            }
+
+            @include expect {
+                html {
+                color: #373737;
+                font-family: Georgia, "Times New Roman", serif;
+                font-size: calc(.5vw + 1rem);
+                line-height: 1.618;
+                }
+
+                /*=====
+                #Everything
+                =====*/
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p,
+                ul,
+                ol,
+                dl,
+                pre {
+                line-height: 1.618;
+                margin: 0 0.618rem 0 0.618rem;
+                }
+            }
+        }
+    }
+    @include it('headings') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(headings)
+            }
+
+            @include expect {
+                /*=====
+                #Headings
+                =====*/
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                font-family: Helvetica, Arial, sans-serif;
+                font-weight: bold;
+                line-height: 1.2;
+                margin-bottom: calc(1.618vmin - 1vmax + .35em);
+                }
+
+                h1 {
+                font-size: 2.617924em;
+                }
+
+                h2 {
+                font-size: 1.618em;
+                }
+
+                h3 {
+                font-size: 1.5em;
+                }
+
+                h4 {
+                font-size: 1.3rem;
+                }
+
+                h5 {
+                font-size: 1.2rem;
+                }
+
+                h6 {
+                font-size: 1.1rem;
+                }
+            }
+        }
+    }
+    @include it('blocks') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(blocks)
+            }
+
+            @include expect {
+                /*=====
+                #Paragraphs #Blocks
+                =====*/
+                hr {
+                color: #a5a5a5;
+                border-width: 0.0625em;
+                border-style: solid;
+                margin: 1.618em 0.618rem;
+                }
+
+                p,
+                blockquote {
+                line-height: 1.618;
+                }
+
+                p {
+                font-size: 1rem;
+                margin-bottom: 0.618em;
+                }
+
+                /* Credit where it's due:
+                    https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
+                */
+                blockquote {
+                background: rgba(165, 165, 165, 0.15);
+                border-left: 10px solid gainsboro;
+                margin: 1.618em 0.618rem;
+                /* Comment-A */
+                padding: 0.618em 0.618rem;
+                quotes: "“" "”" "‘" "’";
+                }
+
+                blockquote::before {
+                color: #c1c1c1;
+                content: open-quote;
+                font-size: 4em;
+                line-height: 0.1em;
+                margin-right: 0.25em;
+                vertical-align: -0.4em;
+                }
+
+            }
+        }
+    }
+    @include it('lists') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(lists)
+            }
+
+            @include expect {
+                /*=====
+                #Lists
+                =====*/
+                ul,
+                ol,
+                dl {
+                padding: 0.618em 0.618rem;
+                /* Comment-A */
+                }
+
+                li {
+                text-indent: -0.9em;
+                line-height: 1.618;
+                padding: 0;
+                margin: 0 0 0 0.618rem;
+                }
+
+                li {
+                list-style-position: inside;
+                }
+
+                dt {
+                text-indent: -0.618rem;
+                }
+
+                dd {
+                margin: 0;
+                padding: 0 0.618rem 0 0.618rem;
+                }
+            }
+        }
+    }
+    @include it('contentFlow') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(contentFlow)
+            }
+
+            @include expect {
+                /*=====
+                #Content-Flow
+                =====*/
+                em,
+                i,
+                cite {
+                font-style: italic;
+                }
+
+                strong,
+                b {
+                font-weight: 700;
+                }
+
+                cite {
+                display: block;
+                text-align: right;
+                }
+
+                u {
+                text-decoration: none;
+                border-bottom: 1px dotted red;
+                }
+
+                small,
+                sub,
+                sup {
+                font-size: 0.618rem;
+                line-height: 1;
+                }
+
+                sub {
+                vertical-align: sub;
+                }
+
+                sup {
+                vertical-align: super;
+                }
+
+                /*=====
+                #Content-Flow #editorial
+                =====*/
+                s,
+                strike,
+                del,
+                ins {
+                color: #6e6e6e;
+                }
+
+                s,
+                strike,
+                del {
+                text-decoration: strikethrough;
+                }
+
+                ins,
+                del {
+                background-color: rgba(220, 220, 220, 0.25);
+                }
+
+                ins {
+                text-decoration: none;
+                }
+
+                /*
+                mark and selection should be different, so user knows which one they've selected.
+
+                mark and selections:
+                saturation: 44%
+                lightness: 75%
+                Hue is different
+                */
+                mark {
+                background-color: rgba(165, 220, 165, 0.9);
+                }
+
+                ::selection {
+                background-color: rgba(165, 220, 220, 0.9);
+                }
+
+                /* Because mark and selection have same saturation, brightenss, mark won't easily stand out if it's selected */
+                mark::selection {
+                background-color: rgba(165, 220, 110, 0.9);
+                }
+
+                /* dfn and dt both do the same thing: denote a term to be defined */
+                dfn,
+                dt {
+                font-style: oblique;
+                font-weight: 700;
+                text-transform: capitalize;
+                }
+
+            }
+        }
+    }
+    @include it('code') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(code)
+            }
+
+            @include expect {
+                /*=====
+                #Content-flow #Code
+                =====*/
+                pre,
+                code,
+                var,
+                samp,
+                data {
+                font-family: monospace;
+                }
+
+                kbd,
+                samp,
+                data {
+                background-color: rgba(165, 165, 165, 0.2);
+                }
+
+                kbd {
+                font-size: 0.75rem;
+                padding: 0.25ex 0.5ex;
+                border: 1px solid #c1c1c1;
+                border-radius: 3px;
+                }
+
+                /*Treat samp like a mini blockquote. because basically you're quoting what the computer would do*/
+                samp,
+                data {
+                padding: 0 10px;
+                }
+
+                var,
+                data {
+                font-style: italic;
+                }
+
+                samp {
+                border-left: 5px solid #c1c1c1;
+                }
+
+                data {
+                padding: 0 10px;
+                }
+
+                pre {
+                font-size: 0.75rem;
+                line-height: 1.2;
+                padding: 0.618em 0.618rem;
+                border: 1px solid #c1c1c1;
+                border-radius: 2px;
+                overflow: scroll;
+                }
+            }
+        }
+    }
+    @include it('ruby') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(ruby)
+            }
+
+            @include expect {
+                /*=====
+                #Ruby
+                =====*/
+                ruby {
+                display: ruby;
+                position: relative;
+                margin: 0 0.5ex;
+                -webkit-ruby-position: before;
+                ruby-position: over;
+                ruby-position: before;
+                }
+
+                rtc, rbc {
+                font-size: inherit;
+                line-height: 1;
+                ruby-align: start;
+                }
+
+                rt {
+                display: ruby-text;
+                font-size: 0.7em;
+                }
+
+                rt + rt {
+                margin-left: 0.5ex;
+                }
+
+                rtc > bdo {
+                display: -webkit-ruby-text-container;
+                display: ruby-base-container;
+                }
+
+                /*complex ruby for chrome and Edge*/
+                /*only FF has "complete" ruby support*/
+                @supports (ruby-align: left) or (not (display: ruby-base-container)) {
+                ruby {
+                    display: inline-flex;
+                    flex-direction: column;
+                    vertical-align: 1em;
+                    line-height: 1;
+                }
+
+                rtc, rt {
+                    order: -1;
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                }
+
+                rtc {
+                    display: inline-flex;
+                }
+                }
+                /*Edge fixes*/
+                @supports (ruby-align: left) {
+                rtc {
+                    justify-content: space-between;
+                }
+
+                rt {
+                    display: inline-flex;
+                }
+                }
+            }
+        }
+    }
+    @include it('links') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(links)
+            }
+
+            @include expect {
+                /*=====
+                #Links
+                =====*/
+                a {
+                color: #6ea5dc;
+                text-decoration: none;
+                border-bottom: 1px dotted transparent;
+                transition: all 0.3s ease-in-out;
+                }
+
+                a:hover,
+                a:focus {
+                color: #6ea5c1;
+                border-color: #6ea5c1;
+                outline: none;
+                }
+
+                a:active {
+                border-style: solid;
+                }
+
+            }
+        }
+    }
+    @include it('table') {
+        @include assert{
+            @include output {
+                @include typographyBaseline(table)
+            }
+
+            @include expect {
+                /*==========
+                #Table
+                ==========*/
+                table {
+                font-size: 0.8rem;
+                }
+
+                caption {
+                font-size: 1rem;
+                text-transform: capitalize;
+                font-style: italic;
+                }
+
+                th, td {
+                text-align: left;
+                vertical-align: middle;
+                line-height: 1.2;
+                padding: 0.4em 0.618rem;
+                }
+
+                th {
+                font-family: Helvetica, Arial, sans-serif;
+                font-weight: bold;
+                font-size: 1.3rem;
+                /*treat th in a body as h4*/
+                }
+
+                thead th,
+                tfoot th {
+                font-size: 1.5em;
+                /*treat th in header/footer as h3*/
+                }
+            }
+        }
+    }
+}

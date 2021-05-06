@@ -49,7 +49,7 @@ $variableMapsList: (
     $fontFamilyVarMap
 );
 
-@function mergeMapsInList($mapsList: variableMapsList) {
+@function mergeMapsInList($mapsList: $variableMapsList) {
     $allVariablesMap: ();
     
     @each $variablesMap in $mapsList {
@@ -86,7 +86,7 @@ $variableMapsList: (
     html {
         color: sassOrCssVar('baseTextColor');
         font-family: sassOrCssVar(baseFontFamily);
-        font-size: calc(.5vw + 1rem); /* the font-size can scale up as the browser window gets larger, but doesn't get hard to read when the browser window shrinks*/
+        font-size: calc(.5vw + 1rem);
         line-height: sassOrCssVar(baseLineHeight);
     }
 
@@ -107,7 +107,7 @@ $variableMapsList: (
         dl,
         pre {
             line-height: sassOrCssVar(baseLineHeight);
-            margin: 0 .618rem 0 .618rem; /* Comment-A */
+            margin: 0 .618rem 0 .618rem;
         }
     }
 
