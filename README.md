@@ -1,17 +1,72 @@
-# Typography-baseline.css
-> A good start to your CSS typography that covers all the semantic nooks and crannies
+# Typography-baseline.scss
+> A good start to your SCSS typography that covers all the semantic nooks and crannies
 
 [![License][license-image]][license-url] [![Downloads][downloads-image]][downloads-url]
 
 **NPM**
 ```
+npm install --save typography-baseline.scss
+```
+
+Or, if you wanted the [CSS Version](https://github.com/paceaux/typography-baseline)
+
+```
 npm install --save typography-baseline.css
 ```
 
-**Download**
-`https://raw.githubusercontent.com/paceaux/typography-baseline/master/src/baseline.css`
+## What are some SCSS specific features?
+### Sassified Variables
+A core feature of the typography baseline is that it used CSS variables (AKA CSS custom properties). This has all of the same variable names, but in SCSS/SASS form. 
 
-## What does it do?
+```
+$colorNeutralDarker: rgb(55,55,55);
+$colorNeutralDark: rgb(110,110,110);
+$colorNeutral: rgb(165,165,165);
+$colorNeutralLight: rgb(192.5,192.5,192.5);
+$colorNeutralLighter: rgb(220,220,220);
+$colorCool: rgb(110,165,220);
+$colorCoolDarker: rgb(110,165,193);
+```
+### The Typography Baseline broken into sections that can be turned off:
+
+The baseline contains the following sections:
+
+* `document` : `:root` and `html`
+* `headings` : All them `h` 
+* `lists`  : `ul`, `ol`, and the too cool `dl`
+* `blocks` : Your `hr`, `p`, and the `blockquote`
+* `contentFlow` : `em` through `u`, all the way through `mark` and `strike`, too. 
+* `code` : `code`, `kbd`, and our pals `var`, `samp`, and `data`
+* `ruby` : Destination unknown, `ruby`, `rtc` even some `bdo`
+* `links` : All them `a` and pseudo class shenanigans
+* `table` : `table`, `caption`, and some `th` and `td`
+
+### Ability to turn off custom properties
+If you don't want CSS Variables, that's fine. 
+
+```
+@include typographyBaseline($exclude: cssVariables);
+```
+
+### Ability to output only certain sections
+You can give either a specific section, or a list of sections. 
+
+**This will turn off CSS variables:**
+
+```
+@include typographyBaseline($include: (document, headings, lists, blocks))
+```
+
+But you can turn on specific sections _with_ CSS variables by adding it to the list of arguments:
+
+```
+@include typographyBaseline($include: (document, headings, lists, cssVariables))
+```
+
+## Mid-Readme shoutout:
+This is modelled on the [scss port of Normalize](https://github.com/JohnAlbin/normalize-scss). Big thanks to John Albin for his work on that because that gave this project a safe, well-tested foundation to start with.  
+
+## What does the typography-baseline do?
 ### It gives you a good start
 Before you start the layout of a web site or web application, and before you dive into applying to brand, you need something to which you should apply your brand. This is that thing. 
 
