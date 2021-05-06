@@ -1,0 +1,62 @@
+@import 'node_modules/sass-true/sass/true';
+@import '../../sass/_baseline';
+
+@include describe('core functions') {
+    @include it('has a variableMapsList') {
+        @include assert-true(
+            $variableMapsList
+        )
+    }
+
+    @include it('outputVariableMap will create custom props from a keyvalue pair') {
+        @include assert {
+            @include output {
+                @include _outputVariableMap(('foo': 'bar', 'baz': 2))
+            }
+
+            @include expect {
+                --foo: bar;
+                --baz: 2;
+            }
+        }
+    }
+    @include it('outputVariableMaps will create custom props from a list of maps') {
+        @include assert {
+            @include output {
+                @include outputVariableMaps((('foo': 'bar', 'baz': 2), ('oof': 'rab', 'zab': 2)))
+            }
+
+            @include expect {
+                --foo: bar;
+                --baz: 2;
+                --oof: rab;
+                --zab: 2;
+            }
+        }
+    }
+
+    @include it('sassOrCSSVar can output a CSS var if told to') {
+        @include assert {
+            @include output {
+                $myVariablesMap: ('embiggen': 2em);
+                font-size: sassOrCssVar(embiggen, true, $myVariablesMap);
+            }
+
+            @include expect {
+                font-size: var(--embiggen);
+            }
+        }
+    }
+    @include it('sassOrCSSVar can output the value of a var if told to') {
+        @include assert {
+            @include output {
+                $myVariablesMap: ('embiggen': 2em);
+                font-size: sassOrCssVar(embiggen, false, $myVariablesMap);
+            }
+
+            @include expect {
+                font-size: 2em;
+            }
+        }
+    }
+}

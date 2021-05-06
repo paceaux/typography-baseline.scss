@@ -60,9 +60,7 @@ $variableMapsList: (
 
 
 
-@function sassOrCssVar($varName) {
-    $needsCssVar: _baselineInclude(cssVariables);
-    $allVariablesMap: getAllVariablesMap();
+@function sassOrCssVar($varName, $needsCssVar: _baselineInclude(cssVariables), $allVariablesMap: getAllVariablesMap()) {
 
     @if $needsCssVar {
         $cssVar: string.insert('--', $varName, 100);
