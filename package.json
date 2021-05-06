@@ -1,5 +1,5 @@
 {
-  "name": "typography-baseline.css",
+  "name": "typography-baseline.scss",
   "version": "2.0.0",
   "description": "A good start to your CSS and SCSS typography that covers all the semantic nooks and crannies",
   "homepage": "https://github.com/paceaux/typography-baseline.scss#readme",
@@ -18,8 +18,8 @@
     "Typography",
     "typography-baseline"
   ],
-  "main": "sass/_baseline.css",
-  "style": "sass/_baseline.css",
+  "main": "sass/_baseline.scss",
+  "style": "sass/_baseline.scss",
   "directories": {
     "lib": "sass",
     "test": "test"
