@@ -2,7 +2,7 @@
 @import 'node_modules/sass-true/sass/true';
 @import '../../sass/_baseline';
 
-@include describe('individual sections') {
+@include describe('all the individual sections') {
     @include it('document') {
         @include assert{
             @include output {
@@ -480,6 +480,739 @@
                 tfoot th {
                 font-size: 1.5em;
                 /*treat th in header/footer as h3*/
+                }
+            }
+        }
+    }
+}
+
+@include describe('excluding sections') {
+    @include it('can exclude one item') {
+        @include assert {
+            @include output {
+                @include typographyBaseline($exclude: table)
+            }
+
+            @include expect {
+                :root {
+                --colorNeutralDarker: #373737;
+                --colorNeutralDark: #6e6e6e;
+                --colorNeutral: #a5a5a5;
+                --colorNeutralLight: #c1c1c1;
+                --colorNeutralLighter: gainsboro;
+                --colorCool: #6ea5dc;
+                --colorCoolDarker: #6ea5c1;
+                --baseTextColor: #373737;
+                --baseEditorialTextColor: #6e6e6e;
+                --baseLinkColor: #6ea5dc;
+                --baseLinkColorHover: #6ea5c1;
+                --baseInlineBorderColor: #c1c1c1;
+                --baseLineHeight: 1.618;
+                --smallLineHeight: 1.2;
+                --baseTextSize: 1rem;
+                --biggestTextSize: 1.3rem;
+                --biggerTextSize: 1.2rem;
+                --bigTextSize: 1.1rem;
+                --smallTextSize: 0.8rem;
+                --smallerTextSize: 0.75rem;
+                --smallestTextSize: 0.618rem;
+                --baseTitleSize: 1.5em;
+                --biggestTitleSize: 2.617924em;
+                --bigTitleSize: 1.618em;
+                --smallTitleSize: 1.3rem;
+                --smallerTitleSize: 1.2rem;
+                --smallestTitleSize: 1.1rem;
+                --baseFontFamily: Georgia, Times New Roman, serif;
+                --titleFontFamily: Helvetica, Arial, sans-serif;
+                --codeFontFamily: monospace;
+                }
+
+                html {
+                color: var(--baseTextColor);
+                font-family: var(--baseFontFamily);
+                font-size: calc(.5vw + 1rem);
+                line-height: var(--baseLineHeight);
+                }
+
+                /*=====
+                #Everything
+                =====*/
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p,
+                ul,
+                ol,
+                dl,
+                pre {
+                line-height: var(--baseLineHeight);
+                margin: 0 0.618rem 0 0.618rem;
+                }
+
+                /*=====
+                #Headings
+                =====*/
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                font-family: var(--titleFontFamily);
+                font-weight: bold;
+                line-height: var(--smallLineHeight);
+                margin-bottom: calc(1.618vmin - 1vmax + .35em);
+                }
+
+                h1 {
+                font-size: var(--biggestTitleSize);
+                }
+
+                h2 {
+                font-size: var(--bigTitleSize);
+                }
+
+                h3 {
+                font-size: var(--baseTitleSize);
+                }
+
+                h4 {
+                font-size: var(--smallTitleSize);
+                }
+
+                h5 {
+                font-size: var(--smallerTitleSize);
+                }
+
+                h6 {
+                font-size: var(--smallestTitleSize);
+                }
+
+                /*=====
+                #Lists
+                =====*/
+                ul,
+                ol,
+                dl {
+                padding: 0.618em 0.618rem;
+                /* Comment-A */
+                }
+
+                li {
+                text-indent: -0.9em;
+                line-height: var(--baseLineHeight);
+                padding: 0;
+                margin: 0 0 0 0.618rem;
+                }
+
+                li {
+                list-style-position: inside;
+                }
+
+                dt {
+                text-indent: -0.618rem;
+                }
+
+                dd {
+                margin: 0;
+                padding: 0 0.618rem 0 0.618rem;
+                }
+
+                /*=====
+                #Paragraphs #Blocks
+                =====*/
+                hr {
+                color: var(--colorNeutral);
+                border-width: 0.0625em;
+                border-style: solid;
+                margin: 1.618em 0.618rem;
+                }
+
+                p,
+                blockquote {
+                line-height: var(--baseLineHeight);
+                }
+
+                p {
+                font-size: var(--baseTextSize);
+                margin-bottom: 0.618em;
+                }
+
+                /* Credit where it's due:
+                    https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
+                */
+                blockquote {
+                background: rgba(165, 165, 165, 0.15);
+                border-left: 10px solid var(--colorNeutralLighter);
+                margin: 1.618em 0.618rem;
+                /* Comment-A */
+                padding: 0.618em 0.618rem;
+                quotes: "“" "”" "‘" "’";
+                }
+
+                blockquote::before {
+                color: var(--colorNeutralLight);
+                content: open-quote;
+                font-size: 4em;
+                line-height: 0.1em;
+                margin-right: 0.25em;
+                vertical-align: -0.4em;
+                }
+
+                /*=====
+                #Content-Flow
+                =====*/
+                em,
+                i,
+                cite {
+                font-style: italic;
+                }
+
+                strong,
+                b {
+                font-weight: 700;
+                }
+
+                cite {
+                display: block;
+                text-align: right;
+                }
+
+                u {
+                text-decoration: none;
+                border-bottom: 1px dotted red;
+                }
+
+                small,
+                sub,
+                sup {
+                font-size: var(--smallestTextSize);
+                line-height: 1;
+                }
+
+                sub {
+                vertical-align: sub;
+                }
+
+                sup {
+                vertical-align: super;
+                }
+
+                /*=====
+                #Content-Flow #editorial
+                =====*/
+                s,
+                strike,
+                del,
+                ins {
+                color: var(--baseEditorialTextColor);
+                }
+
+                s,
+                strike,
+                del {
+                text-decoration: strikethrough;
+                }
+
+                ins,
+                del {
+                background-color: rgba(220, 220, 220, 0.25);
+                }
+
+                ins {
+                text-decoration: none;
+                }
+
+                /*
+                mark and selection should be different, so user knows which one they've selected.
+
+                mark and selections:
+                saturation: 44%
+                lightness: 75%
+                Hue is different
+                */
+                mark {
+                background-color: rgba(165, 220, 165, 0.9);
+                }
+
+                ::selection {
+                background-color: rgba(165, 220, 220, 0.9);
+                }
+
+                /* Because mark and selection have same saturation, brightenss, mark won't easily stand out if it's selected */
+                mark::selection {
+                background-color: rgba(165, 220, 110, 0.9);
+                }
+
+                /* dfn and dt both do the same thing: denote a term to be defined */
+                dfn,
+                dt {
+                font-style: oblique;
+                font-weight: 700;
+                text-transform: capitalize;
+                }
+
+                /*=====
+                #Content-flow #Code
+                =====*/
+                pre,
+                code,
+                var,
+                samp,
+                data {
+                font-family: var(--codeFontFamily);
+                }
+
+                kbd,
+                samp,
+                data {
+                background-color: rgba(165, 165, 165, 0.2);
+                }
+
+                kbd {
+                font-size: var(--smallerTextSize);
+                padding: 0.25ex 0.5ex;
+                border: 1px solid var(--baseInlineBorderColor);
+                border-radius: 3px;
+                }
+
+                /*Treat samp like a mini blockquote. because basically you're quoting what the computer would do*/
+                samp,
+                data {
+                padding: 0 10px;
+                }
+
+                var,
+                data {
+                font-style: italic;
+                }
+
+                samp {
+                border-left: 5px solid var(--baseInlineBorderColor);
+                }
+
+                data {
+                padding: 0 10px;
+                }
+
+                pre {
+                font-size: var(--smallerTextSize);
+                line-height: var(--smallLineHeight);
+                padding: 0.618em 0.618rem;
+                border: 1px solid var(--baseInlineBorderColor);
+                border-radius: 2px;
+                overflow: scroll;
+                }
+
+                /*=====
+                #Ruby
+                =====*/
+                ruby {
+                display: ruby;
+                position: relative;
+                margin: 0 0.5ex;
+                -webkit-ruby-position: before;
+                ruby-position: over;
+                ruby-position: before;
+                }
+
+                rtc, rbc {
+                font-size: inherit;
+                line-height: 1;
+                ruby-align: start;
+                }
+
+                rt {
+                display: ruby-text;
+                font-size: 0.7em;
+                }
+
+                rt + rt {
+                margin-left: 0.5ex;
+                }
+
+                rtc > bdo {
+                display: -webkit-ruby-text-container;
+                display: ruby-base-container;
+                }
+
+                /*complex ruby for chrome and Edge*/
+                /*only FF has "complete" ruby support*/
+                @supports (ruby-align: left) or (not (display: ruby-base-container)) {
+                ruby {
+                    display: inline-flex;
+                    flex-direction: column;
+                    vertical-align: 1em;
+                    line-height: 1;
+                }
+
+                rtc, rt {
+                    order: -1;
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                }
+
+                rtc {
+                    display: inline-flex;
+                }
+                }
+                /*Edge fixes*/
+                @supports (ruby-align: left) {
+                rtc {
+                    justify-content: space-between;
+                }
+
+                rt {
+                    display: inline-flex;
+                }
+                }
+                /*=====
+                #Links
+                =====*/
+                a {
+                color: var(--baseLinkColor);
+                text-decoration: none;
+                border-bottom: 1px dotted transparent;
+                transition: all 0.3s ease-in-out;
+                }
+
+                a:hover,
+                a:focus {
+                color: var(--baseLinkColorHover);
+                border-color: var(--baseLinkColorHover);
+                outline: none;
+                }
+
+                a:active {
+                border-style: solid;
+                }
+
+            }
+        }
+    }
+    @include it('can exclude many items') {
+        @include assert {
+            @include output {
+                @include typographyBaseline($exclude: (table, ruby, code, contentFlow))
+            }
+
+            @include expect {
+                :root {
+                --colorNeutralDarker: #373737;
+                --colorNeutralDark: #6e6e6e;
+                --colorNeutral: #a5a5a5;
+                --colorNeutralLight: #c1c1c1;
+                --colorNeutralLighter: gainsboro;
+                --colorCool: #6ea5dc;
+                --colorCoolDarker: #6ea5c1;
+                --baseTextColor: #373737;
+                --baseEditorialTextColor: #6e6e6e;
+                --baseLinkColor: #6ea5dc;
+                --baseLinkColorHover: #6ea5c1;
+                --baseInlineBorderColor: #c1c1c1;
+                --baseLineHeight: 1.618;
+                --smallLineHeight: 1.2;
+                --baseTextSize: 1rem;
+                --biggestTextSize: 1.3rem;
+                --biggerTextSize: 1.2rem;
+                --bigTextSize: 1.1rem;
+                --smallTextSize: 0.8rem;
+                --smallerTextSize: 0.75rem;
+                --smallestTextSize: 0.618rem;
+                --baseTitleSize: 1.5em;
+                --biggestTitleSize: 2.617924em;
+                --bigTitleSize: 1.618em;
+                --smallTitleSize: 1.3rem;
+                --smallerTitleSize: 1.2rem;
+                --smallestTitleSize: 1.1rem;
+                --baseFontFamily: Georgia, Times New Roman, serif;
+                --titleFontFamily: Helvetica, Arial, sans-serif;
+                --codeFontFamily: monospace;
+                }
+
+                html {
+                color: var(--baseTextColor);
+                font-family: var(--baseFontFamily);
+                font-size: calc(.5vw + 1rem);
+                line-height: var(--baseLineHeight);
+                }
+
+                /*=====
+                #Everything
+                =====*/
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p,
+                ul,
+                ol,
+                dl,
+                pre {
+                line-height: var(--baseLineHeight);
+                margin: 0 0.618rem 0 0.618rem;
+                }
+
+                /*=====
+                #Headings
+                =====*/
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                font-family: var(--titleFontFamily);
+                font-weight: bold;
+                line-height: var(--smallLineHeight);
+                margin-bottom: calc(1.618vmin - 1vmax + .35em);
+                }
+
+                h1 {
+                font-size: var(--biggestTitleSize);
+                }
+
+                h2 {
+                font-size: var(--bigTitleSize);
+                }
+
+                h3 {
+                font-size: var(--baseTitleSize);
+                }
+
+                h4 {
+                font-size: var(--smallTitleSize);
+                }
+
+                h5 {
+                font-size: var(--smallerTitleSize);
+                }
+
+                h6 {
+                font-size: var(--smallestTitleSize);
+                }
+
+                /*=====
+                #Lists
+                =====*/
+                ul,
+                ol,
+                dl {
+                padding: 0.618em 0.618rem;
+                /* Comment-A */
+                }
+
+                li {
+                text-indent: -0.9em;
+                line-height: var(--baseLineHeight);
+                padding: 0;
+                margin: 0 0 0 0.618rem;
+                }
+
+                li {
+                list-style-position: inside;
+                }
+
+                dt {
+                text-indent: -0.618rem;
+                }
+
+                dd {
+                margin: 0;
+                padding: 0 0.618rem 0 0.618rem;
+                }
+
+                /*=====
+                #Paragraphs #Blocks
+                =====*/
+                hr {
+                color: var(--colorNeutral);
+                border-width: 0.0625em;
+                border-style: solid;
+                margin: 1.618em 0.618rem;
+                }
+
+                p,
+                blockquote {
+                line-height: var(--baseLineHeight);
+                }
+
+                p {
+                font-size: var(--baseTextSize);
+                margin-bottom: 0.618em;
+                }
+
+                /* Credit where it's due:
+                    https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
+                */
+                blockquote {
+                background: rgba(165, 165, 165, 0.15);
+                border-left: 10px solid var(--colorNeutralLighter);
+                margin: 1.618em 0.618rem;
+                /* Comment-A */
+                padding: 0.618em 0.618rem;
+                quotes: "“" "”" "‘" "’";
+                }
+
+                blockquote::before {
+                color: var(--colorNeutralLight);
+                content: open-quote;
+                font-size: 4em;
+                line-height: 0.1em;
+                margin-right: 0.25em;
+                vertical-align: -0.4em;
+                }
+
+                /*=====
+                #Links
+                =====*/
+                a {
+                color: var(--baseLinkColor);
+                text-decoration: none;
+                border-bottom: 1px dotted transparent;
+                transition: all 0.3s ease-in-out;
+                }
+
+                a:hover,
+                a:focus {
+                color: var(--baseLinkColorHover);
+                border-color: var(--baseLinkColorHover);
+                outline: none;
+                }
+
+                a:active {
+                border-style: solid;
+                }
+            }
+        }
+    }
+
+}
+@include describe('sections with/out css vars') {
+    @include it('if all you ask for is CSS variables, you just get a :root') {
+        @include assert {
+
+            @include output {
+                @include typographyBaseline((cssVariables));
+            }
+            @include expect {
+                :root {
+                    --colorNeutralDarker: #373737;
+                    --colorNeutralDark: #6e6e6e;
+                    --colorNeutral: #a5a5a5;
+                    --colorNeutralLight: #c1c1c1;
+                    --colorNeutralLighter: gainsboro;
+                    --colorCool: #6ea5dc;
+                    --colorCoolDarker: #6ea5c1;
+                    --baseTextColor: #373737;
+                    --baseEditorialTextColor: #6e6e6e;
+                    --baseLinkColor: #6ea5dc;
+                    --baseLinkColorHover: #6ea5c1;
+                    --baseInlineBorderColor: #c1c1c1;
+                    --baseLineHeight: 1.618;
+                    --smallLineHeight: 1.2;
+                    --baseTextSize: 1rem;
+                    --biggestTextSize: 1.3rem;
+                    --biggerTextSize: 1.2rem;
+                    --bigTextSize: 1.1rem;
+                    --smallTextSize: 0.8rem;
+                    --smallerTextSize: 0.75rem;
+                    --smallestTextSize: 0.618rem;
+                    --baseTitleSize: 1.5em;
+                    --biggestTitleSize: 2.617924em;
+                    --bigTitleSize: 1.618em;
+                    --smallTitleSize: 1.3rem;
+                    --smallerTitleSize: 1.2rem;
+                    --smallestTitleSize: 1.1rem;
+                    --baseFontFamily: Georgia, Times New Roman, serif;
+                    --titleFontFamily: Helvetica, Arial, sans-serif;
+                    --codeFontFamily: monospace;
+                }
+            }
+        }
+    }
+    @include it('you can get CSS variables on just headings') {
+        @include assert {
+
+            @include output {
+                @include typographyBaseline((cssVariables, headings));
+            }
+            @include expect {
+                :root {
+                --colorNeutralDarker: #373737;
+                --colorNeutralDark: #6e6e6e;
+                --colorNeutral: #a5a5a5;
+                --colorNeutralLight: #c1c1c1;
+                --colorNeutralLighter: gainsboro;
+                --colorCool: #6ea5dc;
+                --colorCoolDarker: #6ea5c1;
+                --baseTextColor: #373737;
+                --baseEditorialTextColor: #6e6e6e;
+                --baseLinkColor: #6ea5dc;
+                --baseLinkColorHover: #6ea5c1;
+                --baseInlineBorderColor: #c1c1c1;
+                --baseLineHeight: 1.618;
+                --smallLineHeight: 1.2;
+                --baseTextSize: 1rem;
+                --biggestTextSize: 1.3rem;
+                --biggerTextSize: 1.2rem;
+                --bigTextSize: 1.1rem;
+                --smallTextSize: 0.8rem;
+                --smallerTextSize: 0.75rem;
+                --smallestTextSize: 0.618rem;
+                --baseTitleSize: 1.5em;
+                --biggestTitleSize: 2.617924em;
+                --bigTitleSize: 1.618em;
+                --smallTitleSize: 1.3rem;
+                --smallerTitleSize: 1.2rem;
+                --smallestTitleSize: 1.1rem;
+                --baseFontFamily: Georgia, Times New Roman, serif;
+                --titleFontFamily: Helvetica, Arial, sans-serif;
+                --codeFontFamily: monospace;
+                }
+
+                /*=====
+                #Headings
+                =====*/
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                font-family: var(--titleFontFamily);
+                font-weight: bold;
+                line-height: var(--smallLineHeight);
+                margin-bottom: calc(1.618vmin - 1vmax + .35em);
+                }
+
+                h1 {
+                font-size: var(--biggestTitleSize);
+                }
+
+                h2 {
+                font-size: var(--bigTitleSize);
+                }
+
+                h3 {
+                font-size: var(--baseTitleSize);
+                }
+
+                h4 {
+                font-size: var(--smallTitleSize);
+                }
+
+                h5 {
+                font-size: var(--smallerTitleSize);
+                }
+
+                h6 {
+                font-size: var(--smallestTitleSize);
                 }
             }
         }
