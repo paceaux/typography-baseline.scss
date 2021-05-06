@@ -1,0 +1,58 @@
+@import 'node_modules/sass-true/sass/true';
+@import '../../sass/baseline/textSizes.variables.scss';
+
+@include describe('line heights') {
+    @include it('has the base line height') {
+        @include assert-true(
+            $baseLineHeight
+        )
+    }
+    @include it('has the small line-height') {
+        @include assert-true(
+            $smallLineHeight
+        )
+    }
+}
+
+@include describe('text sizes') {
+    @include it('has the base text size') {
+        @include assert-true(
+            $baseFontSize
+        )
+    }
+    @include it('hase a baseFontSize of 1rem') {
+        @include assert-equal(
+            $baseFontSize,
+            1rem
+        )
+    }
+    @include it('has a smallest and biggest text size') {
+        @include assert-true(
+            $smallestTextSize
+        );
+
+        @include assert-true(
+            $biggestTextSize
+        );
+    }    
+    @include it('has a smallest and biggest title size') {
+        @include assert-true(
+            $smallestTitleSize
+        );
+
+        @include assert-true(
+            $biggestTitleSize
+        );
+    }
+    @include it('has overlapping title and text sizes') {
+        @include assert-equal(
+            $smallTitleSize,
+            $biggestTextSize
+        );
+
+        @include assert-equal(
+            $smallerTitleSize,
+            $biggerTextSize
+        );
+    }
+}

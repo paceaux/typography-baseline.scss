@@ -16,10 +16,19 @@
     "CSS",
     "Typography"
   ],
+  "scripts": {
+    "test": "mocha test/*.js",
+    "debug": "sass test/debug.scss:build/debug.css"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/paceaux/typography-baseline/issues"
   },
   "homepage": "https://github.com/paceaux/typography-baseline#readme",
-  "author": "Frank M. Taylor"
+  "author": "Frank M. Taylor",
+  "devDependencies": {
+    "mocha": "^8.3.2",
+    "sass": "^1.32.12",
+    "sass-true": "^6.0.1"
+  }
 }

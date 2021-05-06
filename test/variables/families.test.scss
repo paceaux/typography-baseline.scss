@@ -1,0 +1,20 @@
+@import 'node_modules/sass-true/sass/true';
+@import '../../sass/baseline/families.variables.scss';
+
+@include describe('font families') {
+    @include it('has the base font family') {
+        @include assert-true(
+            $baseFontFamily
+        )
+    }
+    @include it('has the title font family') {
+        @include assert-true(
+            $titleFontFamily
+        )
+    }
+    @include it('has the code font family') {
+        @include assert-true(
+            $codeFontFamily
+        )
+    }
+}

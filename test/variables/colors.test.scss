@@ -1,0 +1,47 @@
+@import 'node_modules/sass-true/sass/true';
+@import '../../sass/baseline/colors.variables.scss';
+
+@include describe('color variables') {
+    @include it('has core color palette') {
+        @include assert {
+            @include output {
+                .colorNeutralDarker{color: $colorNeutralDarker;}
+                .colorNeutralDark{color: $colorNeutralDark;}
+                .colorNeutral{color: $colorNeutral;}
+                .colorNeutralLight{color: $colorNeutralLight;}
+                .colorNeutralLighter{color: $colorNeutralLighter;}
+                .colorCool{color: $colorCool;}
+                .colorCoolDarker{color: $colorCoolDarker; }
+            }
+            @include expect {
+                .colorNeutralDarker {color: rgb(55,55,55);}
+                .colorNeutralDark {color: rgb(110,110,110);}
+                .colorNeutral {color: rgb(165,165,165);}
+                .colorNeutralLight {color: rgb(192.5,192.5,192.5);}
+                .colorNeutralLighter {color: rgb(220,220,220);}
+                .colorCool {color: rgb(110,165,220);}
+                .colorCoolDarker {color: rgb(110,165,193);}
+            }
+        }
+    }
+    @include it('has base colors') {
+        @include assert {
+            @include output {
+                .baseTextColor {color: $baseTextColor;}
+                .baseEditorialTextColor {color: $baseEditorialTextColor;}
+                .baseLinkColor {color: $baseLinkColor;}
+                .baseLinkColorHover {color: $baseLinkColorHover;}
+                .baseInlineBorderColor {color: $baseInlineBorderColor;}
+            }
+
+            @include expect {
+                .baseTextColor {color: rgb(55,55,55);}
+                .baseEditorialTextColor {color: rgb(110,110,110);}
+                .baseLinkColor {color: rgb(110,165,220);}
+                .baseLinkColorHover {color: rgb(110,165,193);}
+                .baseInlineBorderColor {color: rgb(192.5,192.5,192.5);}
+            }
+        }
+        
+    }
+}
