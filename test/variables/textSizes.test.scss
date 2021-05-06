@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import 'node_modules/sass-true/sass/true';
 @import '../../sass/baseline/textSizes.variables.scss';
 
@@ -53,6 +54,22 @@
         @include assert-equal(
             $smallerTitleSize,
             $biggerTextSize
+        );
+    }
+    @include it('has text size variable maps') {
+        @include assert-true(
+            $textSizeVarMap
+        );
+        @include assert-true(
+            $titleSizeVarMap
+        );
+    }
+    @include it('has values in the text variable maps') {
+        @include assert-true(
+            map.has-key($textSizeVarMap, 'baseTextSize')
+        );
+        @include assert-true(
+            map.has-key($titleSizeVarMap, 'baseTitleSize')
         );
     }
 }

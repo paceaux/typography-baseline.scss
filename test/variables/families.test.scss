@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import 'node_modules/sass-true/sass/true';
 @import '../../sass/baseline/families.variables.scss';
 
@@ -16,5 +17,21 @@
         @include assert-true(
             $codeFontFamily
         )
+    }
+    @include it('has a family variable map') {
+        @include assert-true(
+            $fontFamilyVarMap
+        );
+    }
+    @include it('the family Var Map has 3 families') {
+        @include assert-true(
+            map.has-key($fontFamilyVarMap, 'baseFontFamily')
+        );
+        @include assert-true(
+            map.has-key($fontFamilyVarMap, 'titleFontFamily')
+        );
+        @include assert-true(
+            map.has-key($fontFamilyVarMap, 'codeFontFamily')
+        );
     }
 }

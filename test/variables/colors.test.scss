@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import 'node_modules/sass-true/sass/true';
 @import '../../sass/baseline/colors.variables.scss';
 
@@ -43,5 +44,21 @@
             }
         }
         
+    }
+    @include it('has a color variable maps') {
+        @include assert-true(
+            $colorPaletteVarMap
+        );
+        @include assert-true(
+            $colorBaseVarMap
+        );
+    }
+    @include it('has values in the color variable maps') {
+        @include assert-true(
+            map.has-key($colorPaletteVarMap, 'colorNeutralDarker')
+        );
+        @include assert-true(
+            map.has-key($colorBaseVarMap, 'baseTextColor')
+        );
     }
 }
