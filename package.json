@@ -1,31 +1,33 @@
 {
   "name": "typography-baseline.css",
   "version": "2.0.0",
-  "description": "A good start to your CSS typography that covers all the semantic nooks and crannies",
-  "main": "src/baseline.css",
-  "style": "src/baseline.css",
-  "files": [
-    "LICENSE.md",
-    "src/baseline.css"
-  ],
+  "description": "A good start to your CSS and SCSS typography that covers all the semantic nooks and crannies",
+  "homepage": "https://github.com/paceaux/typography-baseline.scss#readme",
+  "bugs": {
+    "url": "https://github.com/paceaux/typography-baseline.scss/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paceaux/typography-baseline.git"
+    "url": "git+https://github.com/paceaux/typography-baseline.scss.git"
   },
+  "author": "Frank M. Taylor",
+  "license": "MIT",
   "keywords": [
     "CSS",
-    "Typography"
+    "SCSS",
+    "Typography",
+    "typography-baseline"
   ],
+  "main": "sass/_baseline.css",
+  "style": "sass/_baseline.css",
+  "directories": {
+    "lib": "sass",
+    "test": "test"
+  },
   "scripts": {
     "test": "mocha test/*.js",
     "debug": "sass test/debug.scss:build/debug.css"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/paceaux/typography-baseline/issues"
-  },
-  "homepage": "https://github.com/paceaux/typography-baseline#readme",
-  "author": "Frank M. Taylor",
   "devDependencies": {
     "mocha": "^8.3.2",
     "sass": "^1.32.12",
