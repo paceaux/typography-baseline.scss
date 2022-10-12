@@ -1,0 +1,12 @@
+$bigSpacingHorizontal: 1.618rem;
+$baseSpacingHorizontal: .618rem;
+
+$bigSpacingVertical: 1.618em;
+$baseSpacingVertical: .618em;
+
+$spacingVarMap: (
+    "bigSpacingHorizontal": $bigSpacingHorizontal,
+    "baseSpacingHorizontal": $baseSpacingHorizontal,
+    "bigSpacingVertical": $bigSpacingVertical,
+    "baseSpacingVertical": $baseSpacingVertical,
+);

@@ -23,10 +23,18 @@ $baseLinkColor: $colorCool;
 $baseLinkColorHover: $colorCoolDarker;
 $baseInlineBorderColor: $colorNeutralLight;
 
+$baseTextLineColor: var($baseTextColor);
+$alertTextLineColor: rgb(255, 0, 0);
+
+$baseQuoteBackgroundColor: 165, 165, 165, ;
+
 $colorBaseVarMap: (
     "baseTextColor": $baseTextColor,
     "baseEditorialTextColor": $baseEditorialTextColor,
     "baseLinkColor": $baseLinkColor,
     "baseLinkColorHover": $baseLinkColorHover,
-    "baseInlineBorderColor": $baseInlineBorderColor
+    "baseInlineBorderColor": $baseInlineBorderColor,
+    "baseTextLineColor": $baseTextLineColor,
+    "alertTextLineColor": $alertTextLineColor,
+    "baseQuoteBackgroundColor": $baseQuoteBackgroundColor
 );

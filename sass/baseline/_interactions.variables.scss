@@ -1,0 +1,9 @@
+$idleTextLineStyle: dotted;
+$activeTextLineStyle: solid;
+$idleTextDecoration: $idleTextLineStyle underline 2px;
+
+$interactionsVarMap: (
+    "idleTextLineStyle": $idleTextLineStyle,
+    "activeTextLineStyle": $activeTextLineStyle,
+    "idleTextDecoration": $idleTextDecoration,
+);

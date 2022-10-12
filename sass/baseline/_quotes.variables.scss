@@ -1,0 +1,9 @@
+$baseTextQuotes: "\201C""\201D""\2018""\2019";
+$baseQuoteBorder: 10px solid $colorNeutralLighter;
+$smallQuoteBorder: 5px solid $colorNeutralLight;
+
+$quotesVarMap: (
+    "baseTextQuotes": $baseTextQuotes,
+    "baseQuoteBorder": $baseQuoteBorder,
+    "smallQuoteBorder": $smallQuoteBorder
+);

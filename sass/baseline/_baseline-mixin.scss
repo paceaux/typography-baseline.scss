@@ -46,7 +46,12 @@ $variableMapsList: (
     $lineHeightVarMap,
     $textSizeVarMap,
     $titleSizeVarMap,
-    $fontFamilyVarMap
+    $fontFamilyVarMap,
+    $fontWeightVarMap,
+    $fontVoiceVarMap,
+    $quotesVarMap,
+    $spacingVarMap,
+    $interactionsVarMap
 );
 
 @function mergeMapsInList($mapsList: $variableMapsList) {
@@ -106,7 +111,7 @@ $variableMapsList: (
         dl,
         pre {
             line-height: sassOrCssVar(baseLineHeight);
-            margin: 0 .618rem 0 .618rem;
+            margin: 0 sassOrCssVar(baseSpacingHorizontal)
         }
     }
 
@@ -122,7 +127,7 @@ $variableMapsList: (
         h5,
         h6 {
             font-family: sassOrCssVar(titleFontFamily);
-            font-weight: bold;
+            font-weight: sassOrCssVar(heaviestFontWeight);
             line-height: sassOrCssVar(smallLineHeight);
             margin-bottom: calc(1.618vmin - 1vmax + .35em);
         }
@@ -160,27 +165,34 @@ $variableMapsList: (
         ul,
         ol,
         dl {
-            padding: .618em .618rem; /* Comment-A */
+            padding: sassOrCssVar(baseSpacingVertical) sassOrCssVar(baseSpacingHorizontal); /* Comment-A */
         }
 
         li {
             text-indent: -.9em;
             line-height: sassOrCssVar(baseLineHeight);
             padding: 0;
-            margin: 0 0 0 .618rem;
+            margin: 0 0 0 sassOrCssVar(baseSpacingHorizontal);
         }
 
         li {
             list-style-position: inside;
         }
 
+        nav li,
+        menu li {
+            text-indent: 0;
+            list-style-type: none;
+            margin: 0;
+        }
+
         dt {
-            text-indent: -.618rem;
+            text-indent: calc(-1 * sassOrCssVar(baseSpacingHorizontal));
         }
 
         dd {
             margin: 0;
-            padding: 0 .618rem 0 .618rem;
+            padding: 0 sassOrCssVar(baseSpacingHorizontal);
         }
     }
 
@@ -193,7 +205,7 @@ $variableMapsList: (
             color: sassOrCssVar(colorNeutral);
             border-width: .0625em;
             border-style: solid;
-            margin: 1.618em .618rem;
+            margin: sassOrCssVar(bigSpacingVertical) sassOrCssVar(baseSpacingHorizontal);
         }
 
         p,
@@ -203,10 +215,19 @@ $variableMapsList: (
 
         p {
             font-size: sassOrCssVar(baseTextSize);
-            margin-bottom: .618em;
+            margin-bottom: sassOrCssVar(baseSpacingVertical);
         }
 
+        blockquote,
+        q {
+            quotes: sassOrCssVar(baseTextQuotes);
+        }
 
+        blockquote::before,
+        q::before {
+            content: open-quote;
+        }
+    
         /* Credit where it's due:
             https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
         */
@@ -218,13 +239,24 @@ $variableMapsList: (
             quotes: "\201C""\201D""\2018""\2019";
         }
 
-        blockquote::before {
+        blockquote::before,
+        blockquote::after {
             color: sassOrCssVar(colorNeutralLight);
-            content: open-quote;
             font-size: 4em;
             line-height: 0.1em;
-            margin-right: 0.25em;
-            vertical-align: -0.4em;
+            vertical-align: -0.5em;
+        }
+
+        blockquote::before {
+            margin-right: sassOrCssVar(baseSpacingHorizontal);
+        }
+
+        blockquote::after {
+            content: no-close-quote;
+        }
+
+        q::after {
+            content: close-quote;
         }
     }
 
@@ -236,12 +268,12 @@ $variableMapsList: (
         em,
         i,
         cite {
-            font-style: italic;
+            font-style: sassOrCssVar(alternateFontVoice);
         }
 
         strong,
         b {
-            font-weight: 700;
+            font-weight: sassOrCssVar(heaviestFontWeight);
         }
 
         cite {
@@ -295,6 +327,11 @@ $variableMapsList: (
         ins {
             text-decoration: none;
         }
+
+        u {
+            text-decoration: sassOrCssVar(idleTextDecoration);
+            text-decoration-color: sassOrCssVar(alertTextLineColor);
+        }
         /*
         mark and selection should be different, so user knows which one they've selected.
 
@@ -309,19 +346,30 @@ $variableMapsList: (
         }
 
         ::selection {
-            background-color: rgba(165, 220, 220, .9);
+            background-color: rgba(126, 205, 166, .9);
         }
 
         /* Because mark and selection have same saturation, brightenss, mark won't easily stand out if it's selected */
         mark::selection {
             background-color: rgba(165, 220, 110, .9);
         }
+    
         /* dfn and dt both do the same thing: denote a term to be defined */
         dfn,
         dt {
-            font-style: oblique;
-            font-weight: 700;
+            font-style: sassOrCssVar(shiftedFontVoice);
+            font-weight: sassOrCssVar(heaviestFontWeight);
             text-transform: capitalize;
+        }
+
+        abbr {
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        /* an abbreviation with a title should invite a user to hover over it*/
+        abbr[title] {
+            text-decoration: sassOrCssVar(idleTextDecoration);
         }
     }
 
@@ -359,21 +407,17 @@ $variableMapsList: (
 
         var,
         data {
-            font-style: italic;
+            font-style: sassOrCssVar(alternateFontVoice);
         }
 
         samp {
-            border-left: 5px solid sassOrCssVar(baseInlineBorderColor);
-        }
-
-        data {
-            padding: 0 10px;
+            border-left: sassOrCssVar(smallQuoteBorder);
         }
 
         pre {
             font-size: sassOrCssVar(smallerTextSize);
             line-height: sassOrCssVar(smallLineHeight);
-            padding: .618em .618rem;
+            padding: sassOrCssVar(baseSpacingVertical) sassOrCssVar(baseSpacingHorizontal);
             border: 1px solid sassOrCssVar(baseInlineBorderColor);
             border-radius: 2px;
             overflow: scroll;
@@ -457,7 +501,7 @@ $variableMapsList: (
         a {
             color: sassOrCssVar(baseLinkColor);
             text-decoration: none;
-            border-bottom: 1px dotted transparent;
+            border-bottom: 1px sassOrCssVar(idleTextLineStyle) transparent;
             transition: all .3s ease-in-out;
         }
 
@@ -485,19 +529,19 @@ $variableMapsList: (
         caption {
             font-size:  sassOrCssVar(baseTextSize);
             text-transform: capitalize;
-            font-style: italic;
+            font-style: sassOrCssVar(alternateFontVoice);
         }
 
         th, td {
             text-align: left;
             vertical-align: middle;
             line-height: sassOrCssVar(smallLineHeight);
-            padding: .4em .618rem;
+            padding: .4em sassOrCssVar(baseSpacingHorizontal);
         }
 
         th {
             font-family: sassOrCssVar(titleFontFamily);
-            font-weight: bold;
+            font-weight: sassOrCssVar(heaviestFontWeight);
             font-size: sassOrCssVar(smallTitleSize); /*treat th in a body as h4*/
         }
 
