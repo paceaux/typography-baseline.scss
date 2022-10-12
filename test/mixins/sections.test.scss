@@ -32,7 +32,7 @@
                 dl,
                 pre {
                 line-height: 1.618;
-                margin: 0 0.618rem 0 0.618rem;
+                margin: 0 var(--baseSpacingHorizontal);
                 }
             }
         }
@@ -54,7 +54,7 @@
                 h5,
                 h6 {
                 font-family: Helvetica, Arial, sans-serif;
-                font-weight: bold;
+                font-weight: var(--heaviestFontWeight);
                 line-height: 1.2;
                 margin-bottom: calc(1.618vmin - 1vmax + .35em);
                 }
@@ -99,7 +99,7 @@
                 color: #a5a5a5;
                 border-width: 0.0625em;
                 border-style: solid;
-                margin: 1.618em 0.618rem;
+                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
                 }
 
                 p,
@@ -109,28 +109,46 @@
 
                 p {
                 font-size: 1rem;
-                margin-bottom: 0.618em;
+                margin-bottom: var(--baseSpacingVertical);
                 }
 
+                blockquote,
+                q {
+                    quotes: var(--baseTextQuotes);
+                }
+
+                blockquote::before,
+                q::before {
+                    content: open-quote;
+                }
                 /* Credit where it's due:
                     https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
                 */
                 blockquote {
                 background: rgba(165, 165, 165, 0.15);
-                border-left: 10px solid gainsboro;
-                margin: 1.618em 0.618rem;
-                /* Comment-A */
-                padding: 0.618em 0.618rem;
-                quotes: "“" "”" "‘" "’";
+                border-left: var(--baseQuoteBorder);
+                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
+                }
+
+                blockquote::before,
+                blockquote::after {
+                color: var(--colorNeutralLight);
+                font-size: 4em;
+                line-height: 0.1em;
+                vertical-align: -0.5em;
                 }
 
                 blockquote::before {
-                color: #c1c1c1;
-                content: open-quote;
-                font-size: 4em;
-                line-height: 0.1em;
-                margin-right: 0.25em;
-                vertical-align: -0.4em;
+                margin-right: var(--baseSpacingHorizontal);
+                }
+
+                blockquote::after {
+                content: no-close-quote;
+                }
+
+                q::after {
+                content: close-quote;
                 }
 
             }
@@ -148,29 +166,37 @@
                 =====*/
                 ul,
                 ol,
-                dl {
-                padding: 0.618em 0.618rem;
-                /* Comment-A */
+                dl,
+                menu {
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
                 }
 
                 li {
-                text-indent: -0.9em;
-                line-height: 1.618;
+                text-indent: -.9em;
+                /*this brings the left text aligned with the text of a <dd> element*/
+                line-height: var(--baseLineHeight);
                 padding: 0;
-                margin: 0 0 0 0.618rem;
+                margin: 0 0 0 var(--baseSpacingHorizontal);
                 }
 
                 li {
                 list-style-position: inside;
                 }
 
+                nav li,
+                menu li {
+                text-indent: 0;
+                list-style-type: none;
+                margin: 0;
+                }
+
                 dt {
-                text-indent: -0.618rem;
+                text-indent: calc(-1 * var(--baseSpacingHorizontal));
                 }
 
                 dd {
                 margin: 0;
-                padding: 0 0.618rem 0 0.618rem;
+                padding: 0 var(--baseSpacingHorizontal);
                 }
             }
         }
@@ -188,22 +214,17 @@
                 em,
                 i,
                 cite {
-                font-style: italic;
+                font-style: var(--alternateFontVoice);
                 }
 
                 strong,
                 b {
-                font-weight: 700;
+                font-weight: var(--heaviestFontWeight);
                 }
 
                 cite {
                 display: block;
                 text-align: right;
-                }
-
-                u {
-                text-decoration: none;
-                border-bottom: 1px dotted red;
                 }
 
                 small,
@@ -234,7 +255,7 @@
                 s,
                 strike,
                 del {
-                text-decoration: strikethrough;
+                text-decoration: line-through;
                 }
 
                 ins,
@@ -246,6 +267,10 @@
                 text-decoration: none;
                 }
 
+                u {
+                text-decoration: var(--idleTextDecoration);
+                text-decoration-color: var(--alertTextLineColor);
+                }
                 /*
                 mark and selection should be different, so user knows which one they've selected.
 
@@ -259,7 +284,7 @@
                 }
 
                 ::selection {
-                background-color: rgba(165, 220, 220, 0.9);
+                background-color: rgba(126, 205, 166, 0.9);
                 }
 
                 /* Because mark and selection have same saturation, brightenss, mark won't easily stand out if it's selected */
@@ -270,11 +295,20 @@
                 /* dfn and dt both do the same thing: denote a term to be defined */
                 dfn,
                 dt {
-                font-style: oblique;
-                font-weight: 700;
+                font-style: var(--shiftedFontVoice);
+                font-weight: var(--heaviestFontWeight);
                 text-transform: capitalize;
                 }
 
+                abbr {
+                text-transform: uppercase;
+                text-decoration: none;
+                }
+
+                /* an abbreviation with a title should invite a user to hover over it*/
+                abbr[title] {
+                text-decoration: var(--idleTextDecoration);
+                }
             }
         }
     }
@@ -317,21 +351,17 @@
 
                 var,
                 data {
-                font-style: italic;
+                font-style: var(--alternateFontVoice);
                 }
 
                 samp {
-                border-left: 5px solid #c1c1c1;
-                }
-
-                data {
-                padding: 0 10px;
+                border-left: var(--smallQuoteBorder);
                 }
 
                 pre {
                 font-size: 0.75rem;
                 line-height: 1.2;
-                padding: 0.618em 0.618rem;
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
                 border: 1px solid #c1c1c1;
                 border-radius: 2px;
                 overflow: scroll;
@@ -424,7 +454,7 @@
                 a {
                 color: #6ea5dc;
                 text-decoration: none;
-                border-bottom: 1px dotted transparent;
+                border-bottom: 1px var(--idleTextLineStyle) transparent;
                 transition: all 0.3s ease-in-out;
                 }
 
@@ -459,7 +489,7 @@
                 caption {
                 font-size: 1rem;
                 text-transform: capitalize;
-                font-style: italic;
+                font-style: var(--alternateFontVoice);
                 }
 
                 th, td {
@@ -471,7 +501,7 @@
 
                 th {
                 font-family: Helvetica, Arial, sans-serif;
-                font-weight: bold;
+                font-weight: var(--heaviestFontWeight);
                 font-size: 1.3rem;
                 /*treat th in a body as h4*/
                 }
@@ -495,18 +525,21 @@
 
             @include expect {
                 :root {
-                --colorNeutralDarker: #373737;
-                --colorNeutralDark: #6e6e6e;
-                --colorNeutral: #a5a5a5;
-                --colorNeutralLight: #c1c1c1;
-                --colorNeutralLighter: gainsboro;
-                --colorCool: #6ea5dc;
-                --colorCoolDarker: #6ea5c1;
-                --baseTextColor: #373737;
-                --baseEditorialTextColor: #6e6e6e;
-                --baseLinkColor: #6ea5dc;
-                --baseLinkColorHover: #6ea5c1;
-                --baseInlineBorderColor: #c1c1c1;
+                --colorNeutralDarker: rgb(55, 55, 55);
+                --colorNeutralDark: rgb(110, 110, 110);
+                --colorNeutral: rgb(165, 165, 165);
+                --colorNeutralLight: rgb(193, 193, 193);
+                --colorNeutralLighter: rgb(220, 220, 220);
+                --colorCool: rgb(110, 165, 220);
+                --colorCoolDarker: rgb(110, 165, 193);
+                --baseTextColor: rgb(55, 55, 55);
+                --baseEditorialTextColor: rgb(110, 110, 110);
+                --baseLinkColor: rgb(110, 165, 220);
+                --baseLinkColorHover: rgb(110, 165, 193);
+                --baseInlineBorderColor: rgb(193, 193, 193);
+                --baseTextLineColor: rgb(55, 55, 55);
+                --alertTextLineColor: rgb(255, 0, 0);
+                --baseQuoteBackgroundColor: 165, 165, 165;
                 --baseLineHeight: 1.618;
                 --smallLineHeight: 1.2;
                 --baseTextSize: 1rem;
@@ -525,6 +558,22 @@
                 --baseFontFamily: Georgia, Times New Roman, serif;
                 --titleFontFamily: Helvetica, Arial, sans-serif;
                 --codeFontFamily: monospace;
+                --lightestFontWeight: 100;
+                --baseFontWeight: 400;
+                --heaviestFontWeight: 700;
+                --shiftedFontVoice: oblique 15deg;
+                --baseFontVoice: normal;
+                --alternateFontVoice: italic;
+                --baseTextQuotes: “ ” ‘ ’;
+                --baseQuoteBorder: 10px solid rgb(220, 220, 220);
+                --smallQuoteBorder: 5px solid rgb(193, 193, 193);
+                --bigSpacingHorizontal: 1.618rem;
+                --baseSpacingHorizontal: 0.618rem;
+                --bigSpacingVertical: 1.618em;
+                --baseSpacingVertical: 0.618em;
+                --idleTextLineStyle: dotted;
+                --activeTextLineStyle: solid;
+                --idleTextDecoration: dotted underline 2px;
                 }
 
                 html {
@@ -549,7 +598,7 @@
                 dl,
                 pre {
                 line-height: var(--baseLineHeight);
-                margin: 0 0.618rem 0 0.618rem;
+                margin: 0 var(--baseSpacingHorizontal);
                 }
 
                 /*=====
@@ -562,7 +611,7 @@
                 h5,
                 h6 {
                 font-family: var(--titleFontFamily);
-                font-weight: bold;
+                font-weight: var(--heaviestFontWeight);
                 line-height: var(--smallLineHeight);
                 margin-bottom: calc(1.618vmin - 1vmax + .35em);
                 }
@@ -596,29 +645,36 @@
                 =====*/
                 ul,
                 ol,
-                dl {
-                padding: 0.618em 0.618rem;
-                /* Comment-A */
+                dl,
+                menu {
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
                 }
 
                 li {
                 text-indent: -0.9em;
                 line-height: var(--baseLineHeight);
                 padding: 0;
-                margin: 0 0 0 0.618rem;
+                margin: 0 0 0 var(--baseSpacingHorizontal);
                 }
 
                 li {
                 list-style-position: inside;
                 }
 
+                nav li,
+                menu li {
+                text-indent: 0;
+                list-style-type: none;
+                margin: 0;
+                }
+
                 dt {
-                text-indent: -0.618rem;
+                text-indent: calc(-1 * var(--baseSpacingHorizontal));
                 }
 
                 dd {
                 margin: 0;
-                padding: 0 0.618rem 0 0.618rem;
+                padding: 0 var(--baseSpacingHorizontal);
                 }
 
                 /*=====
@@ -628,7 +684,7 @@
                 color: var(--colorNeutral);
                 border-width: 0.0625em;
                 border-style: solid;
-                margin: 1.618em 0.618rem;
+                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
                 }
 
                 p,
@@ -638,7 +694,17 @@
 
                 p {
                 font-size: var(--baseTextSize);
-                margin-bottom: 0.618em;
+                margin-bottom: var(--baseSpacingVertical);
+                }
+
+                blockquote,
+                q {
+                    quotes: var(--baseTextQuotes);
+                }
+
+                blockquote::before,
+                q::before {
+                    content: open-quote;
                 }
 
                 /* Credit where it's due:
@@ -646,20 +712,29 @@
                 */
                 blockquote {
                 background: rgba(165, 165, 165, 0.15);
-                border-left: 10px solid var(--colorNeutralLighter);
-                margin: 1.618em 0.618rem;
-                /* Comment-A */
-                padding: 0.618em 0.618rem;
-                quotes: "“" "”" "‘" "’";
+                border-left: var(--baseQuoteBorder);
+                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
+                }
+
+                blockquote::before,
+                blockquote::after {
+                color: var(--colorNeutralLight);
+                font-size: 4em;
+                line-height: 0.1em;
+                vertical-align: -0.5em;
                 }
 
                 blockquote::before {
-                color: var(--colorNeutralLight);
-                content: open-quote;
-                font-size: 4em;
-                line-height: 0.1em;
-                margin-right: 0.25em;
-                vertical-align: -0.4em;
+                margin-right: var(--baseSpacingHorizontal);
+                }
+
+                blockquote::after {
+                content: no-close-quote;
+                }
+
+                q::after {
+                content: close-quote;
                 }
 
                 /*=====
@@ -668,22 +743,17 @@
                 em,
                 i,
                 cite {
-                font-style: italic;
+                font-style: var(--alternateFontVoice);
                 }
 
                 strong,
                 b {
-                font-weight: 700;
+                font-weight: var(--heaviestFontWeight);
                 }
 
                 cite {
                 display: block;
                 text-align: right;
-                }
-
-                u {
-                text-decoration: none;
-                border-bottom: 1px dotted red;
                 }
 
                 small,
@@ -714,7 +784,7 @@
                 s,
                 strike,
                 del {
-                text-decoration: strikethrough;
+                text-decoration: line-through;
                 }
 
                 ins,
@@ -726,6 +796,10 @@
                 text-decoration: none;
                 }
 
+                u {
+                text-decoration: var(--idleTextDecoration);
+                text-decoration-color: var(--alertTextLineColor);
+                }
                 /*
                 mark and selection should be different, so user knows which one they've selected.
 
@@ -739,7 +813,7 @@
                 }
 
                 ::selection {
-                background-color: rgba(165, 220, 220, 0.9);
+                background-color: rgba(126, 205, 166, 0.9);
                 }
 
                 /* Because mark and selection have same saturation, brightenss, mark won't easily stand out if it's selected */
@@ -750,9 +824,19 @@
                 /* dfn and dt both do the same thing: denote a term to be defined */
                 dfn,
                 dt {
-                font-style: oblique;
-                font-weight: 700;
+                font-style: var(--shiftedFontVoice);
+                font-weight: var(--heaviestFontWeight);
                 text-transform: capitalize;
+                }
+
+                abbr {
+                    text-transform: uppercase;
+                    text-decoration: none;
+                }
+
+                /* an abbreviation with a title should invite a user to hover over it*/
+                abbr[title] {
+                    text-decoration: var(--idleTextDecoration);
                 }
 
                 /*=====
@@ -787,21 +871,17 @@
 
                 var,
                 data {
-                font-style: italic;
+                font-style: var(--alternateFontVoice);
                 }
 
                 samp {
-                border-left: 5px solid var(--baseInlineBorderColor);
-                }
-
-                data {
-                padding: 0 10px;
+                border-left: var(--smallQuoteBorder);
                 }
 
                 pre {
                 font-size: var(--smallerTextSize);
                 line-height: var(--smallLineHeight);
-                padding: 0.618em 0.618rem;
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
                 border: 1px solid var(--baseInlineBorderColor);
                 border-radius: 2px;
                 overflow: scroll;
@@ -875,7 +955,7 @@
                 a {
                 color: var(--baseLinkColor);
                 text-decoration: none;
-                border-bottom: 1px dotted transparent;
+                border-bottom: 1px var(--idleTextLineStyle) transparent;
                 transition: all 0.3s ease-in-out;
                 }
 
@@ -901,18 +981,21 @@
 
             @include expect {
                 :root {
-                --colorNeutralDarker: #373737;
-                --colorNeutralDark: #6e6e6e;
-                --colorNeutral: #a5a5a5;
-                --colorNeutralLight: #c1c1c1;
-                --colorNeutralLighter: gainsboro;
-                --colorCool: #6ea5dc;
-                --colorCoolDarker: #6ea5c1;
-                --baseTextColor: #373737;
-                --baseEditorialTextColor: #6e6e6e;
-                --baseLinkColor: #6ea5dc;
-                --baseLinkColorHover: #6ea5c1;
-                --baseInlineBorderColor: #c1c1c1;
+                --colorNeutralDarker: rgb(55, 55, 55);
+                --colorNeutralDark: rgb(110, 110, 110);
+                --colorNeutral: rgb(165, 165, 165);
+                --colorNeutralLight: rgb(193, 193, 193);
+                --colorNeutralLighter: rgb(220, 220, 220);
+                --colorCool: rgb(110, 165, 220);
+                --colorCoolDarker: rgb(110, 165, 193);
+                --baseTextColor: rgb(55, 55, 55);
+                --baseEditorialTextColor: rgb(110, 110, 110);
+                --baseLinkColor: rgb(110, 165, 220);
+                --baseLinkColorHover: rgb(110, 165, 193);
+                --baseInlineBorderColor: rgb(193, 193, 193);
+                --baseTextLineColor: rgb(55, 55, 55);
+                --alertTextLineColor: rgb(255, 0, 0);
+                --baseQuoteBackgroundColor: 165, 165, 165 ;
                 --baseLineHeight: 1.618;
                 --smallLineHeight: 1.2;
                 --baseTextSize: 1rem;
@@ -931,6 +1014,22 @@
                 --baseFontFamily: Georgia, Times New Roman, serif;
                 --titleFontFamily: Helvetica, Arial, sans-serif;
                 --codeFontFamily: monospace;
+                --lightestFontWeight: 100;
+                --baseFontWeight: 400;
+                --heaviestFontWeight: 700;
+                --shiftedFontVoice: oblique 15deg;
+                --baseFontVoice: normal;
+                --alternateFontVoice: italic;
+                --baseTextQuotes: “ ” ‘ ’;
+                --baseQuoteBorder: 10px solid rgb(220, 220, 220);
+                --smallQuoteBorder: 5px solid rgb(193, 193, 193);
+                --bigSpacingHorizontal: 1.618rem;
+                --baseSpacingHorizontal: 0.618rem;
+                --bigSpacingVertical: 1.618em;
+                --baseSpacingVertical: 0.618em;
+                --idleTextLineStyle: dotted;
+                --activeTextLineStyle: solid;
+                --idleTextDecoration: dotted underline 2px;
                 }
 
                 html {
@@ -955,7 +1054,7 @@
                 dl,
                 pre {
                 line-height: var(--baseLineHeight);
-                margin: 0 0.618rem 0 0.618rem;
+                margin: 0 var(--baseSpacingHorizontal);
                 }
 
                 /*=====
@@ -968,7 +1067,7 @@
                 h5,
                 h6 {
                 font-family: var(--titleFontFamily);
-                font-weight: bold;
+                font-weight: var(--heaviestFontWeight);
                 line-height: var(--smallLineHeight);
                 margin-bottom: calc(1.618vmin - 1vmax + .35em);
                 }
@@ -1002,29 +1101,36 @@
                 =====*/
                 ul,
                 ol,
-                dl {
-                padding: 0.618em 0.618rem;
-                /* Comment-A */
+                dl,
+                menu {
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
                 }
 
                 li {
                 text-indent: -0.9em;
                 line-height: var(--baseLineHeight);
                 padding: 0;
-                margin: 0 0 0 0.618rem;
+                margin: 0 0 0 var(--baseSpacingHorizontal);
                 }
 
                 li {
                 list-style-position: inside;
                 }
 
+                nav li,
+                menu li {
+                text-indent: 0;
+                list-style-type: none;
+                margin: 0;
+                }
+                
                 dt {
-                text-indent: -0.618rem;
+                text-indent: calc(-1 * var(--baseSpacingHorizontal));
                 }
 
                 dd {
                 margin: 0;
-                padding: 0 0.618rem 0 0.618rem;
+                padding: 0 var(--baseSpacingHorizontal);
                 }
 
                 /*=====
@@ -1034,7 +1140,7 @@
                 color: var(--colorNeutral);
                 border-width: 0.0625em;
                 border-style: solid;
-                margin: 1.618em 0.618rem;
+                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
                 }
 
                 p,
@@ -1044,7 +1150,17 @@
 
                 p {
                 font-size: var(--baseTextSize);
-                margin-bottom: 0.618em;
+                margin-bottom: var(--baseSpacingVertical);
+                }
+
+                blockquote,
+                q {
+                    quotes: var(--baseTextQuotes);
+                }
+
+                blockquote::before,
+                q::before {
+                    content: open-quote;
                 }
 
                 /* Credit where it's due:
@@ -1052,20 +1168,29 @@
                 */
                 blockquote {
                 background: rgba(165, 165, 165, 0.15);
-                border-left: 10px solid var(--colorNeutralLighter);
-                margin: 1.618em 0.618rem;
-                /* Comment-A */
-                padding: 0.618em 0.618rem;
-                quotes: "“" "”" "‘" "’";
+                border-left: var(--baseQuoteBorder);
+                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
+                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
+                }
+
+                blockquote::before,
+                blockquote::after {
+                color: var(--colorNeutralLight);
+                font-size: 4em;
+                line-height: 0.1em;
+                vertical-align: -0.5em;
                 }
 
                 blockquote::before {
-                color: var(--colorNeutralLight);
-                content: open-quote;
-                font-size: 4em;
-                line-height: 0.1em;
-                margin-right: 0.25em;
-                vertical-align: -0.4em;
+                margin-right: var(--baseSpacingHorizontal);
+                }
+
+                blockquote::after {
+                content: no-close-quote;
+                }
+
+                q::after {
+                content: close-quote;
                 }
 
                 /*=====
@@ -1074,7 +1199,7 @@
                 a {
                 color: var(--baseLinkColor);
                 text-decoration: none;
-                border-bottom: 1px dotted transparent;
+                border-bottom: 1px var(--idleTextLineStyle) transparent;
                 transition: all 0.3s ease-in-out;
                 }
 
@@ -1102,60 +1227,21 @@
             }
             @include expect {
                 :root {
-                    --colorNeutralDarker: #373737;
-                    --colorNeutralDark: #6e6e6e;
-                    --colorNeutral: #a5a5a5;
-                    --colorNeutralLight: #c1c1c1;
-                    --colorNeutralLighter: gainsboro;
-                    --colorCool: #6ea5dc;
-                    --colorCoolDarker: #6ea5c1;
-                    --baseTextColor: #373737;
-                    --baseEditorialTextColor: #6e6e6e;
-                    --baseLinkColor: #6ea5dc;
-                    --baseLinkColorHover: #6ea5c1;
-                    --baseInlineBorderColor: #c1c1c1;
-                    --baseLineHeight: 1.618;
-                    --smallLineHeight: 1.2;
-                    --baseTextSize: 1rem;
-                    --biggestTextSize: 1.3rem;
-                    --biggerTextSize: 1.2rem;
-                    --bigTextSize: 1.1rem;
-                    --smallTextSize: 0.8rem;
-                    --smallerTextSize: 0.75rem;
-                    --smallestTextSize: 0.618rem;
-                    --baseTitleSize: 1.5em;
-                    --biggestTitleSize: 2.617924em;
-                    --bigTitleSize: 1.618em;
-                    --smallTitleSize: 1.3rem;
-                    --smallerTitleSize: 1.2rem;
-                    --smallestTitleSize: 1.1rem;
-                    --baseFontFamily: Georgia, Times New Roman, serif;
-                    --titleFontFamily: Helvetica, Arial, sans-serif;
-                    --codeFontFamily: monospace;
-                }
-            }
-        }
-    }
-    @include it('you can get CSS variables on just headings') {
-        @include assert {
-
-            @include output {
-                @include typographyBaseline((cssVariables, headings));
-            }
-            @include expect {
-                :root {
-                --colorNeutralDarker: #373737;
-                --colorNeutralDark: #6e6e6e;
-                --colorNeutral: #a5a5a5;
-                --colorNeutralLight: #c1c1c1;
-                --colorNeutralLighter: gainsboro;
-                --colorCool: #6ea5dc;
-                --colorCoolDarker: #6ea5c1;
-                --baseTextColor: #373737;
-                --baseEditorialTextColor: #6e6e6e;
-                --baseLinkColor: #6ea5dc;
-                --baseLinkColorHover: #6ea5c1;
-                --baseInlineBorderColor: #c1c1c1;
+                --colorNeutralDarker: rgb(55, 55, 55);
+                --colorNeutralDark: rgb(110, 110, 110);
+                --colorNeutral: rgb(165, 165, 165);
+                --colorNeutralLight: rgb(193, 193, 193);
+                --colorNeutralLighter: rgb(220, 220, 220);
+                --colorCool: rgb(110, 165, 220);
+                --colorCoolDarker: rgb(110, 165, 193);
+                --baseTextColor: rgb(55, 55, 55);
+                --baseEditorialTextColor: rgb(110, 110, 110);
+                --baseLinkColor: rgb(110, 165, 220);
+                --baseLinkColorHover: rgb(110, 165, 193);
+                --baseInlineBorderColor: rgb(193, 193, 193);
+                --baseTextLineColor: rgb(55, 55, 55);
+                --alertTextLineColor: rgb(255, 0, 0);
+                --baseQuoteBackgroundColor: 165, 165, 165;
                 --baseLineHeight: 1.618;
                 --smallLineHeight: 1.2;
                 --baseTextSize: 1rem;
@@ -1174,6 +1260,83 @@
                 --baseFontFamily: Georgia, Times New Roman, serif;
                 --titleFontFamily: Helvetica, Arial, sans-serif;
                 --codeFontFamily: monospace;
+                --lightestFontWeight: 100;
+                --baseFontWeight: 400;
+                --heaviestFontWeight: 700;
+                --shiftedFontVoice: oblique 15deg;
+                --baseFontVoice: normal;
+                --alternateFontVoice: italic;
+                --baseTextQuotes: “ ” ‘ ’;
+                --baseQuoteBorder: 10px solid rgb(220, 220, 220);
+                --smallQuoteBorder: 5px solid rgb(193, 193, 193);
+                --bigSpacingHorizontal: 1.618rem;
+                --baseSpacingHorizontal: 0.618rem;
+                --bigSpacingVertical: 1.618em;
+                --baseSpacingVertical: 0.618em;
+                --idleTextLineStyle: dotted;
+                --activeTextLineStyle: solid;
+                --idleTextDecoration: dotted underline 2px;
+                }
+            }
+        }
+    }
+    @include it('you can get CSS variables on just headings') {
+        @include assert {
+
+            @include output {
+                @include typographyBaseline((cssVariables, headings));
+            }
+            @include expect {
+                :root {
+                --colorNeutralDarker: rgb(55, 55, 55);
+                --colorNeutralDark: rgb(110, 110, 110);
+                --colorNeutral: rgb(165, 165, 165);
+                --colorNeutralLight: rgb(193, 193, 193);
+                --colorNeutralLighter: rgb(220, 220, 220);
+                --colorCool: rgb(110, 165, 220);
+                --colorCoolDarker: rgb(110, 165, 193);
+                --baseTextColor: rgb(55, 55, 55);
+                --baseEditorialTextColor: rgb(110, 110, 110);
+                --baseLinkColor: rgb(110, 165, 220);
+                --baseLinkColorHover: rgb(110, 165, 193);
+                --baseInlineBorderColor: rgb(193, 193, 193);
+                --baseTextLineColor: rgb(55, 55, 55);
+                --alertTextLineColor: rgb(255, 0, 0);
+                --baseQuoteBackgroundColor: 165, 165, 165;
+                --baseLineHeight: 1.618;
+                --smallLineHeight: 1.2;
+                --baseTextSize: 1rem;
+                --biggestTextSize: 1.3rem;
+                --biggerTextSize: 1.2rem;
+                --bigTextSize: 1.1rem;
+                --smallTextSize: 0.8rem;
+                --smallerTextSize: 0.75rem;
+                --smallestTextSize: 0.618rem;
+                --baseTitleSize: 1.5em;
+                --biggestTitleSize: 2.617924em;
+                --bigTitleSize: 1.618em;
+                --smallTitleSize: 1.3rem;
+                --smallerTitleSize: 1.2rem;
+                --smallestTitleSize: 1.1rem;
+                --baseFontFamily: Georgia, Times New Roman, serif;
+                --titleFontFamily: Helvetica, Arial, sans-serif;
+                --codeFontFamily: monospace;
+                --lightestFontWeight: 100;
+                --baseFontWeight: 400;
+                --heaviestFontWeight: 700;
+                --shiftedFontVoice: oblique 15deg;
+                --baseFontVoice: normal;
+                --alternateFontVoice: italic;
+                --baseTextQuotes: “ ” ‘ ’;
+                --baseQuoteBorder: 10px solid rgb(220, 220, 220);
+                --smallQuoteBorder: 5px solid rgb(193, 193, 193);
+                --bigSpacingHorizontal: 1.618rem;
+                --baseSpacingHorizontal: 0.618rem;
+                --bigSpacingVertical: 1.618em;
+                --baseSpacingVertical: 0.618em;
+                --idleTextLineStyle: dotted;
+                --activeTextLineStyle: solid;
+                --idleTextDecoration: dotted underline 2px;
                 }
 
                 /*=====
@@ -1186,7 +1349,7 @@
                 h5,
                 h6 {
                 font-family: var(--titleFontFamily);
-                font-weight: bold;
+                font-weight: var(--heaviestFontWeight);
                 line-height: var(--smallLineHeight);
                 margin-bottom: calc(1.618vmin - 1vmax + .35em);
                 }
