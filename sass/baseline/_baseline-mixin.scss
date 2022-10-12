@@ -171,6 +171,7 @@ $variableMapsList: (
 
         li {
             text-indent: -.9em;
+            /*this brings the left text aligned with the text of a <dd> element*/
             line-height: sassOrCssVar(baseLineHeight);
             padding: 0;
             margin: 0 0 0 sassOrCssVar(baseSpacingHorizontal);

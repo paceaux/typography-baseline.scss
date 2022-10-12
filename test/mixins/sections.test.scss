@@ -11,7 +11,7 @@
 
             @include expect {
                 html {
-                color: #373737;
+                color: rgb(55, 55, 55);
                 font-family: Georgia, "Times New Roman", serif;
                 font-size: calc(.5vw + 1rem);
                 line-height: 1.618;
@@ -32,7 +32,7 @@
                 dl,
                 pre {
                 line-height: 1.618;
-                margin: 0 var(--baseSpacingHorizontal);
+                margin: 0 0.618rem;
                 }
             }
         }
@@ -54,7 +54,7 @@
                 h5,
                 h6 {
                 font-family: Helvetica, Arial, sans-serif;
-                font-weight: var(--heaviestFontWeight);
+                font-weight: 700;
                 line-height: 1.2;
                 margin-bottom: calc(1.618vmin - 1vmax + .35em);
                 }
@@ -96,10 +96,10 @@
                 #Paragraphs #Blocks
                 =====*/
                 hr {
-                color: #a5a5a5;
+                color: rgb(165, 165, 165);
                 border-width: 0.0625em;
                 border-style: solid;
-                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
+                margin: 1.618em 0.618rem;
                 }
 
                 p,
@@ -109,12 +109,12 @@
 
                 p {
                 font-size: 1rem;
-                margin-bottom: var(--baseSpacingVertical);
+                margin-bottom: 0.618em;
                 }
 
                 blockquote,
                 q {
-                    quotes: var(--baseTextQuotes);
+                    quotes: "“""”""‘""’";
                 }
 
                 blockquote::before,
@@ -126,21 +126,21 @@
                 */
                 blockquote {
                 background: rgba(165, 165, 165, 0.15);
-                border-left: var(--baseQuoteBorder);
-                margin: var(--bigSpacingVertical) var(--baseSpacingHorizontal);
-                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
+                border-left: 10px solid rgb(220, 220, 220);
+                margin: 1.618em 0.618rem;
+                padding: 0.618em 0.618rem;
                 }
 
                 blockquote::before,
                 blockquote::after {
-                color: var(--colorNeutralLight);
+                color: rgb(193, 193, 193);
                 font-size: 4em;
                 line-height: 0.1em;
                 vertical-align: -0.5em;
                 }
 
                 blockquote::before {
-                margin-right: var(--baseSpacingHorizontal);
+                margin-right: 0.618rem;
                 }
 
                 blockquote::after {
@@ -168,15 +168,15 @@
                 ol,
                 dl,
                 menu {
-                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
+                padding: 0.618em 0.618rem;
                 }
 
                 li {
                 text-indent: -.9em;
                 /*this brings the left text aligned with the text of a <dd> element*/
-                line-height: var(--baseLineHeight);
+                line-height: 1.618;
                 padding: 0;
-                margin: 0 0 0 var(--baseSpacingHorizontal);
+                margin: 0 0 0 0.618rem;
                 }
 
                 li {
@@ -191,12 +191,12 @@
                 }
 
                 dt {
-                text-indent: calc(-1 * var(--baseSpacingHorizontal));
+                text-indent: -0.618rem;
                 }
 
                 dd {
                 margin: 0;
-                padding: 0 var(--baseSpacingHorizontal);
+                padding: 0 0.618rem;
                 }
             }
         }
@@ -214,17 +214,22 @@
                 em,
                 i,
                 cite {
-                font-style: var(--alternateFontVoice);
+                font-style: italic;
                 }
 
                 strong,
                 b {
-                font-weight: var(--heaviestFontWeight);
+                font-weight: 700;
                 }
 
                 cite {
                 display: block;
                 text-align: right;
+                }
+                
+                u {
+                text-decoration: dotted underline 2px;
+                text-decoration-color: rgb(255, 0, 0);
                 }
 
                 small,
@@ -249,7 +254,7 @@
                 strike,
                 del,
                 ins {
-                color: #6e6e6e;
+                color: rgb(110, 110, 110);
                 }
 
                 s,
@@ -268,8 +273,8 @@
                 }
 
                 u {
-                text-decoration: var(--idleTextDecoration);
-                text-decoration-color: var(--alertTextLineColor);
+                text-decoration: dotted underline 2px;
+                text-decoration-color: rgb(255, 0, 0);
                 }
                 /*
                 mark and selection should be different, so user knows which one they've selected.
@@ -295,8 +300,8 @@
                 /* dfn and dt both do the same thing: denote a term to be defined */
                 dfn,
                 dt {
-                font-style: var(--shiftedFontVoice);
-                font-weight: var(--heaviestFontWeight);
+                font-style: oblique 15deg;
+                font-weight: 700;
                 text-transform: capitalize;
                 }
 
@@ -307,7 +312,7 @@
 
                 /* an abbreviation with a title should invite a user to hover over it*/
                 abbr[title] {
-                text-decoration: var(--idleTextDecoration);
+                text-decoration: dotted underline 2px;
                 }
             }
         }
@@ -339,7 +344,7 @@
                 kbd {
                 font-size: 0.75rem;
                 padding: 0.25ex 0.5ex;
-                border: 1px solid #c1c1c1;
+                border: 1px solid rgb(193,193,193);
                 border-radius: 3px;
                 }
 
@@ -351,18 +356,18 @@
 
                 var,
                 data {
-                font-style: var(--alternateFontVoice);
+                font-style: italic;
                 }
 
                 samp {
-                border-left: var(--smallQuoteBorder);
+                border-left: 5px solid rgb(193, 193, 193);
                 }
 
                 pre {
                 font-size: 0.75rem;
                 line-height: 1.2;
-                padding: var(--baseSpacingVertical) var(--baseSpacingHorizontal);
-                border: 1px solid #c1c1c1;
+                padding: 0.618em 0.618rem;
+                border: 1px solid rgb(193, 193, 193);
                 border-radius: 2px;
                 overflow: scroll;
                 }
@@ -452,16 +457,16 @@
                 #Links
                 =====*/
                 a {
-                color: #6ea5dc;
+                color: rgb(110, 165, 220);
                 text-decoration: none;
-                border-bottom: 1px var(--idleTextLineStyle) transparent;
+                border-bottom: 1px dotted transparent;
                 transition: all 0.3s ease-in-out;
                 }
 
                 a:hover,
                 a:focus {
-                color: #6ea5c1;
-                border-color: #6ea5c1;
+                color: rgb(110, 165, 193);
+                border-color: rgb(110, 165, 193);
                 outline: none;
                 }
 
@@ -489,7 +494,7 @@
                 caption {
                 font-size: 1rem;
                 text-transform: capitalize;
-                font-style: var(--alternateFontVoice);
+                font-style: italic;
                 }
 
                 th, td {
@@ -501,7 +506,7 @@
 
                 th {
                 font-family: Helvetica, Arial, sans-serif;
-                font-weight: var(--heaviestFontWeight);
+                font-weight: 700;
                 font-size: 1.3rem;
                 /*treat th in a body as h4*/
                 }
@@ -652,6 +657,7 @@
 
                 li {
                 text-indent: -0.9em;
+                /*this brings the left text aligned with the text of a <dd> element*/
                 line-height: var(--baseLineHeight);
                 padding: 0;
                 margin: 0 0 0 var(--baseSpacingHorizontal);
@@ -754,6 +760,11 @@
                 cite {
                 display: block;
                 text-align: right;
+                }
+
+                u {
+                text-decoration: var(--idleTextDecoration);
+                text-decoration-color: var(--alertTextLineColor);
                 }
 
                 small,
@@ -1108,6 +1119,7 @@
 
                 li {
                 text-indent: -0.9em;
+                /*this brings the left text aligned with the text of a <dd> element*/
                 line-height: var(--baseLineHeight);
                 padding: 0;
                 margin: 0 0 0 var(--baseSpacingHorizontal);
