@@ -23,7 +23,7 @@ $baseLinkColor: $colorCool;
 $baseLinkColorHover: $colorCoolDarker;
 $baseInlineBorderColor: $colorNeutralLight;
 
-$baseTextLineColor: var($baseTextColor);
+$baseTextLineColor: $baseTextColor;
 $alertTextLineColor: rgb(255, 0, 0);
 
 $baseQuoteBackgroundColor: 165, 165, 165, ;
