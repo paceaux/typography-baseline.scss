@@ -1393,3 +1393,57 @@
         }
     }
 }
+
+@include describe('extensability') {
+    @include it('lets you override heading variables') {
+            @include assert {
+                $baseTitleSize: 2em;
+                $titleFontFamily: 'Comic Sans MS';
+                @include output {
+                    @include typographyBaseline(headings);
+                }
+
+                @include expect {
+
+                    /*=====
+                    #Headings
+                    =====*/
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        font-family: 'Comic Sans MS';
+                        font-weight: 700;
+                        line-height: 1.2;
+                        margin-bottom: calc(1.618vmin - 1vmax + .35em);
+                    }
+
+                    h1 {
+                        font-size: 2.617924em;
+                    }
+
+                    h2 {
+                        font-size: 1.618em;
+                    }
+
+                    h3 {
+                        font-size: 2em;
+                    }
+
+                    h4 {
+                        font-size: 1.3rem;
+                    }
+
+                    h5 {
+                        font-size: 1.2rem;
+                    }
+
+                    h6 {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+        }
+}
