@@ -1,8 +1,8 @@
-$bigSpacingHorizontal: 1.618rem;
-$baseSpacingHorizontal: .618rem;
+$bigSpacingHorizontal: 1.618rem !default;
+$baseSpacingHorizontal: .618rem !default;
 
-$bigSpacingVertical: 1.618em;
-$baseSpacingVertical: .618em;
+$bigSpacingVertical: 1.618em !default;
+$baseSpacingVertical: .618em !default;
 
 $spacingVarMap: (
     "bigSpacingHorizontal": $bigSpacingHorizontal,

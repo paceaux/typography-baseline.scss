@@ -1,10 +1,10 @@
-$colorNeutralDarker: rgb(55,55,55);
-$colorNeutralDark: rgb(110,110,110);
-$colorNeutral: rgb(165,165,165);
-$colorNeutralLight: rgb(192.5,192.5,192.5);
-$colorNeutralLighter: rgb(220,220,220);
-$colorCool: rgb(110,165,220);
-$colorCoolDarker: rgb(110,165,193);
+$colorNeutralDarker: rgb(55,55,55) !default;
+$colorNeutralDark: rgb(110,110,110) !default;
+$colorNeutral: rgb(165,165,165) !default;
+$colorNeutralLight: rgb(192.5,192.5,192.5) !default;
+$colorNeutralLighter: rgb(220,220,220) !default;
+$colorCool: rgb(110,165,220) !default;
+$colorCoolDarker: rgb(110,165,193) !default;
 
 $colorPaletteVarMap: (
     "colorNeutralDarker" : $colorNeutralDarker,
@@ -17,16 +17,16 @@ $colorPaletteVarMap: (
  );
 
 
-$baseTextColor: $colorNeutralDarker;
-$baseEditorialTextColor: $colorNeutralDark;
-$baseLinkColor: $colorCool;
-$baseLinkColorHover: $colorCoolDarker;
-$baseInlineBorderColor: $colorNeutralLight;
+$baseTextColor: $colorNeutralDarker !default;
+$baseEditorialTextColor: $colorNeutralDark !default;
+$baseLinkColor: $colorCool !default;
+$baseLinkColorHover: $colorCoolDarker !default;
+$baseInlineBorderColor: $colorNeutralLight !default;
 
-$baseTextLineColor: $baseTextColor;
-$alertTextLineColor: rgb(255, 0, 0);
+$baseTextLineColor: $baseTextColor !default;
+$alertTextLineColor: rgb(255, 0, 0) !default;
 
-$baseQuoteBackgroundColor: 165, 165, 165, ;
+$baseQuoteBackgroundColor: 165, 165, 165, !default;
 
 $colorBaseVarMap: (
     "baseTextColor": $baseTextColor,

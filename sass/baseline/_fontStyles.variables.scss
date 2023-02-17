@@ -1,10 +1,10 @@
-    $lightestFontWeight: 100;
-    $baseFontWeight: 400;
-    $heaviestFontWeight: 700;
+    $lightestFontWeight: 100 !default;
+    $baseFontWeight: 400 !default;
+    $heaviestFontWeight: 700 !default;
 
-    $shiftedFontVoice: oblique 15deg;
-    $baseFontVoice: normal;
-    $alternateFontVoice: italic;
+    $shiftedFontVoice: oblique 15deg !default;
+    $baseFontVoice: normal !default;
+    $alternateFontVoice: italic !default;
 
     $fontWeightVarMap: (
         "lightestFontWeight": $lightestFontWeight,
